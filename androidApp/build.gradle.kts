@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "pnemonic.clock_always_on.android"
-    compileSdk = 34
+    namespace = "pnemonic.clock_always_on"
+    compileSdk = 35
     defaultConfig {
-        applicationId = "pnemonic.clock_always_on.android"
+        applicationId = "pnemonic.clock_always_on"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
     }
