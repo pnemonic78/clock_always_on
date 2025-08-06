@@ -1,4 +1,4 @@
-package pnemonic.clock_always_on.android
+package pnemonic.clock_always_on
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
