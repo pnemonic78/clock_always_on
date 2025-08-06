@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
+val versionMajor = project.properties["APP_VERSION_MAJOR"].toString().toInt()
+val versionMinor = project.properties["APP_VERSION_MINOR"].toString().toInt()
+
 android {
     namespace = "pnemonic.clock_always_on"
     compileSdk = 35
@@ -11,8 +14,8 @@ android {
         applicationId = "pnemonic.clock_always_on"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = (versionMajor * 1000) + versionMinor
+        versionName = "${versionMajor}.${versionMinor}"
     }
     buildFeatures {
         compose = true
@@ -32,7 +35,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
