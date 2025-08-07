@@ -1,20 +1,39 @@
 package pnemonic.clock_always_on
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import java.text.DateFormat
-
-private val formatter = DateFormat.getTimeInstance(DateFormat.SHORT)
+import kotlinx.coroutines.delay
 
 @Composable
-fun ClockView(time: Long = System.currentTimeMillis()) {
-    val text = formatter.format(time)
-    Text(
-        text = text,
-        fontSize = 80.sp
-    )
+fun ClockView(
+    isDigital: Boolean = true,
+    isSeconds: Boolean = false,
+    is24Hours: Boolean = false,
+    textColor: Color = Color.White
+) {
+    var time by remember { mutableLongStateOf(System.currentTimeMillis()) }
+
+    if (isDigital) {
+        DigitalClock(
+            time = time,
+            isSeconds = isSeconds,
+            is24Hours = is24Hours,
+            textColor = textColor
+        )
+    } else {
+        //TODO AnalogClock(time = time, isSeconds = isSeconds, color = textColor)
+    }
+
+    LaunchedEffect(time) {
+        delay(DateUtils.SECOND_IN_MILLIS)
+        time = System.currentTimeMillis()
+    }
 }
 
 @Preview
