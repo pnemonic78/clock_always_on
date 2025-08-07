@@ -9,6 +9,6 @@ data class ClockConfiguration(
     val isDate: Boolean = true,
     val isBattery: Boolean = true,
     val isBounce: Boolean = false,
-    val backgroundColor: Color = Color.Transparent,
+    val backgroundColor: Color = Color.Black,
     val textColor: Color = Color.White
 )

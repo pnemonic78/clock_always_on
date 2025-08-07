@@ -178,7 +178,7 @@ private fun IconButtonBackgroundColor(color: Color, onClick: ColorCallback) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
     val configuration = ClockConfiguration()

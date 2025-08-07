@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +27,7 @@ fun MainView() {
     val configuration by ccd.configuration().collectAsState(
         ClockConfiguration(is24Hours = platform.is24Hours)
     )
+    val batteryState = remember { BatteryState(50, true) }
 
     val settingsListener = object : SettingsBarListener {
         override val on24HourClick: BooleanCallback = {
@@ -76,7 +77,7 @@ fun MainView() {
             }
             if (configuration.isBattery) {
                 Spacer(modifier = Modifier.height(8.dp))
-                BatteryStatus()
+                BatteryStatus(batteryState)
             }
         }
         SettingsBar(
@@ -87,7 +88,7 @@ fun MainView() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {

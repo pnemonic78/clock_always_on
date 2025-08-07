@@ -23,7 +23,7 @@ fun DigitalDate(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {

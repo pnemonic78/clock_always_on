@@ -35,7 +35,7 @@ fun DigitalClock(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {

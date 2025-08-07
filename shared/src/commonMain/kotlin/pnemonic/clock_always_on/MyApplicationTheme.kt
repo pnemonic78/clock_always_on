@@ -20,7 +20,8 @@ fun MyApplicationTheme(
     val colors = darkColorScheme(
         primary = Color(0xFFBB86FC),
         secondary = Color(0xFF03DAC5),
-        tertiary = Color(0xFF3700B3)
+        tertiary = Color(0xFF3700B3),
+        background = Color.Black
     )
     val typography = Typography(
         bodyMedium = TextStyle(
