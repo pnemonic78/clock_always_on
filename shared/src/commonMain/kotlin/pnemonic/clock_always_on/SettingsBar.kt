@@ -12,11 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import clock_always_on.shared.generated.resources.Res
+import clock_always_on.shared.generated.resources.ic_animation_off
+import clock_always_on.shared.generated.resources.ic_animation_on
+import clock_always_on.shared.generated.resources.ic_battery_off
+import clock_always_on.shared.generated.resources.ic_battery_on
+import clock_always_on.shared.generated.resources.ic_color_fill
+import clock_always_on.shared.generated.resources.ic_color_text
+import clock_always_on.shared.generated.resources.ic_date_off
+import clock_always_on.shared.generated.resources.ic_date_on
+import clock_always_on.shared.generated.resources.ic_timer
+import clock_always_on.shared.generated.resources.ic_timer_off
+import org.jetbrains.compose.resources.painterResource
 
 private val buttonSize = 40.dp
 private val buttonSpace = 8.dp
@@ -82,9 +93,9 @@ private fun IconButtonSeconds(selected: Boolean, onClick: BooleanCallback) {
         Icon(
             modifier = Modifier.size(buttonSize),
             painter = if (selected)
-                painterResource(id = R.drawable.ic_timer)
+                painterResource(Res.drawable.ic_timer)
             else
-                painterResource(id = R.drawable.ic_timer_off),
+                painterResource(Res.drawable.ic_timer_off),
             contentDescription = "seconds"
         )
     }
@@ -99,9 +110,9 @@ private fun IconButtonBounce(selected: Boolean, onClick: BooleanCallback) {
         Icon(
             modifier = Modifier.size(buttonSize),
             painter = if (selected)
-                painterResource(id = R.drawable.ic_animation_on)
+                painterResource(Res.drawable.ic_animation_on)
             else
-                painterResource(id = R.drawable.ic_animation_off),
+                painterResource(Res.drawable.ic_animation_off),
             contentDescription = "bounce"
         )
     }
@@ -115,9 +126,9 @@ private fun IconButtonDate(selected: Boolean, onClick: BooleanCallback) {
         Icon(
             modifier = Modifier.size(buttonSize),
             painter = if (selected)
-                painterResource(id = R.drawable.ic_date_on)
+                painterResource(Res.drawable.ic_date_on)
             else
-                painterResource(id = R.drawable.ic_date_off),
+                painterResource(Res.drawable.ic_date_off),
             contentDescription = "date"
         )
     }
@@ -131,9 +142,9 @@ private fun IconButtonBattery(selected: Boolean, onClick: BooleanCallback) {
         Icon(
             modifier = Modifier.size(buttonSize),
             painter = if (selected)
-                painterResource(id = R.drawable.ic_battery_on)
+                painterResource(Res.drawable.ic_battery_on)
             else
-                painterResource(id = R.drawable.ic_battery_off),
+                painterResource(Res.drawable.ic_battery_off),
             contentDescription = "battery"
         )
     }
@@ -147,7 +158,7 @@ private fun IconButtonTextColor(color: Color, onClick: ColorCallback) {
     ) {
         Icon(
             modifier = Modifier.size(buttonSize),
-            painter = painterResource(id = R.drawable.ic_color_text),
+            painter = painterResource(Res.drawable.ic_color_text),
             contentDescription = "text color"
         )
     }
@@ -161,7 +172,7 @@ private fun IconButtonBackgroundColor(color: Color, onClick: ColorCallback) {
     ) {
         Icon(
             modifier = Modifier.size(buttonSize),
-            painter = painterResource(id = R.drawable.ic_color_fill),
+            painter = painterResource(Res.drawable.ic_color_fill),
             contentDescription = "background color"
         )
     }

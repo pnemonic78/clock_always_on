@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 kotlin {
@@ -30,8 +31,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(compose.components.resources)
+
             api(libs.compose.foundation)
             api(libs.compose.material3)
+            api(libs.compose.ui.tooling.preview)
             api(libs.datastore)
             api(libs.datastore.preferences)
         }
@@ -53,5 +57,12 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+compose {
+    resources {
+        generateResClass = always
+        publicResClass = true
     }
 }

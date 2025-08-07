@@ -4,7 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -12,38 +15,42 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
 fun MainView() {
     val scope = rememberCoroutineScope()
     val ds = rememberDataStore()
-    val cd = rememberClockConfigurationData(ds)
-    val configuration by cd.configuration().collectAsState(ClockConfiguration())
+    val ccd = rememberClockConfigurationData(ds)
+    val platform = rememberPlatform()
+    val configuration by ccd.configuration().collectAsState(
+        ClockConfiguration(is24Hours = platform.is24Hours)
+    )
 
     val settingsListener = object : SettingsBarListener {
         override val on24HourClick: BooleanCallback = {
-            scope.launch { cd.set24Hours(it) }
+            scope.launch { ccd.set24Hours(it) }
         }
         override val onSecondsClick: BooleanCallback = {
-            scope.launch { cd.setSeconds(it) }
+            scope.launch { ccd.setSeconds(it) }
         }
         override val onDateClick: BooleanCallback = {
-            scope.launch { cd.setDate(it) }
+            scope.launch { ccd.setDate(it) }
         }
         override val onBatteryClick: BooleanCallback = {
-            scope.launch { cd.setBattery(it) }
+            scope.launch { ccd.setBattery(it) }
         }
         override val onBounceClick: BooleanCallback = {
-            scope.launch { cd.setBounce(it) }
+            scope.launch { ccd.setBounce(it) }
         }
         override val onTextColorClick: ColorCallback = {
             //TODO show color picker
-            //TODO scope.launch { cd.setTextColor(it) }
+            //TODO scope.launch { ccd.setTextColor(it) }
         }
         override val onBackgroundClick: ColorCallback = {
             //TODO show color picker
-            //TODO scope.launch { cd.setBackgroundColor(it) }
+            //TODO scope.launch { ccd.setBackgroundColor(it) }
         }
     }
 
@@ -64,10 +71,12 @@ fun MainView() {
                 textColor = configuration.textColor
             )
             if (configuration.isDate) {
-                // TODO DateView()
+                Spacer(modifier = Modifier.height(8.dp))
+                DateView()
             }
             if (configuration.isBattery) {
-                // TODO BatteryStatus()
+                Spacer(modifier = Modifier.height(8.dp))
+                BatteryStatus()
             }
         }
         SettingsBar(

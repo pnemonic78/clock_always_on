@@ -8,21 +8,17 @@ import androidx.compose.ui.unit.sp
 import java.text.DateFormat
 
 @Composable
-fun DigitalClock(
+fun DigitalDate(
     time: Long,
-    isSeconds: Boolean = false,
-    is24Hours: Boolean = false,
+    style: Int = DateFormat.DEFAULT,
     textColor: Color = Color.White
 ) {
-    val formatter = if (isSeconds)
-        DateFormat.getTimeInstance(DateFormat.MEDIUM)
-    else
-        DateFormat.getTimeInstance(DateFormat.SHORT)
+    val formatter = DateFormat.getDateInstance(style)
     val text = formatter.format(time)
 
     Text(
         text = text,
-        fontSize = 80.sp,
+        fontSize = 20.sp,
         color = textColor
     )
 }
@@ -31,6 +27,6 @@ fun DigitalClock(
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {
-        DigitalClock(System.currentTimeMillis())
+        DigitalDate(System.currentTimeMillis())
     }
 }

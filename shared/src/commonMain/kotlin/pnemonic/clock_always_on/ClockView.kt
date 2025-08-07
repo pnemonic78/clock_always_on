@@ -23,7 +23,7 @@ fun ClockView(
         DigitalClock(
             time = time,
             isSeconds = isSeconds,
-            is24Hours = is24Hours,
+            is24HourMode = is24Hours,
             textColor = textColor
         )
     } else {
