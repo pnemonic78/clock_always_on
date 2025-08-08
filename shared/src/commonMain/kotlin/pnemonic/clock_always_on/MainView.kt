@@ -14,20 +14,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
 fun MainView() {
+    val locale = Locale.current.platformLocale
     val scope = rememberCoroutineScope()
+    val platform = rememberPlatform()
     val ds = rememberDataStore()
     val ccd = rememberClockConfigurationData(ds)
-    val platform = rememberPlatform()
     val configuration by ccd.configuration().collectAsState(
         ClockConfiguration(is24Hours = platform.is24Hours)
     )
-    val batteryState = remember { BatteryState(50, true) }
+    val skeleton = if (configuration.is24Hours) {
+        if (configuration.isSeconds) "Hms" else "Hm"
+    } else {
+        if (configuration.isSeconds) "hms" else "hm"
+    }
+    val timePattern = platform.getBestDateTimePattern(locale, skeleton)
+    val batteryState = remember { BatteryState() }
 
     val settingsListener = object : SettingsBarListener {
         override val on24HourClick: BooleanCallback = {
@@ -67,8 +75,7 @@ fun MainView() {
         ) {
             ClockView(
                 isDigital = configuration.isDigital,
-                isSeconds = configuration.isSeconds,
-                is24Hours = configuration.is24Hours,
+                pattern = timePattern,
                 textColor = configuration.textColor
             )
             if (configuration.isDate) {

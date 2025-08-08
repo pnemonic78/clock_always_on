@@ -1,30 +1,28 @@
 package pnemonic.clock_always_on
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+private val formatters: MutableMap<String, SimpleDateFormat> = mutableMapOf()
 
 @Composable
 fun DigitalClock(
     time: Long,
-    isSeconds: Boolean = false,
-    is24HourMode: Boolean = false,
-    textColor: Color = Color.White
+    pattern: String = "HH:mm",
+    textColor: Color = MaterialTheme.colorScheme.onBackground
 ) {
-//    val s24 = if (is24HourMode) {
-//        getBestDateTimePattern("Hm")
-//    }
-//     else {
-//        getBestDateTimePattern("hm")
-//    }
-    val formatter = if (isSeconds) {
-        DateFormat.getTimeInstance(DateFormat.MEDIUM)
-    }
-    else {
-        DateFormat.getTimeInstance(DateFormat.SHORT)
+    val locale = Locale.current.platformLocale
+    val formattersKey = "$pattern/$locale"
+    var formatter = formatters[formattersKey]
+    if (formatter == null) {
+        formatter = SimpleDateFormat(pattern, locale)
+        formatters[formattersKey] = formatter
     }
     val text = formatter.format(time)
 

@@ -1,5 +1,6 @@
 package pnemonic.clock_always_on
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -13,17 +14,15 @@ import kotlinx.coroutines.delay
 @Composable
 fun ClockView(
     isDigital: Boolean = true,
-    isSeconds: Boolean = false,
-    is24Hours: Boolean = false,
-    textColor: Color = Color.White
+    pattern: String = "HH:mm",
+    textColor: Color = MaterialTheme.colorScheme.onBackground
 ) {
     var time by remember { mutableLongStateOf(System.currentTimeMillis()) }
 
     if (isDigital) {
         DigitalClock(
             time = time,
-            isSeconds = isSeconds,
-            is24HourMode = is24Hours,
+            pattern = pattern,
             textColor = textColor
         )
     } else {
