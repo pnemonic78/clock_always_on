@@ -10,13 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 
 @Composable
@@ -24,8 +24,8 @@ fun MainView() {
     val locale = Locale.current.platformLocale
     val scope = rememberCoroutineScope()
     val platform = rememberPlatform()
-    val ds = rememberDataStore()
-    val ccd = rememberClockConfigurationData(ds)
+    val dataStore = rememberDataStore()
+    val ccd = rememberClockConfigurationData(dataStore)
     val configuration by ccd.configuration().collectAsState(
         ClockConfiguration(is24Hours = platform.is24Hours)
     )
@@ -35,7 +35,12 @@ fun MainView() {
         if (configuration.isSeconds) "hms" else "hm"
     }
     val timePattern = platform.getBestDateTimePattern(locale, skeleton)
-    val batteryState = remember { BatteryState() }
+    val batteryStateFlow = if (configuration.isBattery) {
+        platform.getBatteryState()
+    } else {
+        emptyFlow<BatteryState>()
+    }
+    val batteryState = batteryStateFlow.collectAsState(BatteryState())
 
     val settingsListener = object : SettingsBarListener {
         override val on24HourClick: BooleanCallback = {
@@ -84,7 +89,7 @@ fun MainView() {
             }
             if (configuration.isBattery) {
                 Spacer(modifier = Modifier.height(8.dp))
-                BatteryStatus(batteryState)
+                BatteryStatus(batteryState.value)
             }
         }
         SettingsBar(
