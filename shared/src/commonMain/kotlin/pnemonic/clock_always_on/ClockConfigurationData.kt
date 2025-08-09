@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -20,6 +21,7 @@ class ClockConfigurationData(
                 is24Hours = p[booleanPreferencesKey(KEY_24)] ?: config.is24Hours,
                 isSeconds = p[booleanPreferencesKey(KEY_SECONDS)] ?: config.isSeconds,
                 isDate = p[booleanPreferencesKey(KEY_DATE)] ?: config.isDate,
+                dateStyle = p[intPreferencesKey(KEY_DATE_STYLE)] ?: config.dateStyle,
                 isBattery = p[booleanPreferencesKey(KEY_BATTERY)] ?: config.isBattery,
                 isBounce = p[booleanPreferencesKey(KEY_BOUNCE)] ?: config.isBounce,
                 backgroundColor = Color(
@@ -48,6 +50,12 @@ class ClockConfigurationData(
     suspend fun setDate(value: Boolean) {
         dataStore.edit {
             it[booleanPreferencesKey(KEY_DATE)] = value
+        }
+    }
+
+    suspend fun setDateStyle(value: Int) {
+        dataStore.edit {
+            it[intPreferencesKey(KEY_DATE_STYLE)] = value
         }
     }
 
@@ -80,6 +88,7 @@ class ClockConfigurationData(
         private const val KEY_24 = "24"
         private const val KEY_SECONDS = "seconds"
         private const val KEY_DATE = "date"
+        private const val KEY_DATE_STYLE = "dateStyle"
         private const val KEY_BATTERY = "battery"
         private const val KEY_BOUNCE = "bounce"
         private const val KEY_BACKGROUND_COLOR = "backgroundColor"

@@ -1,7 +1,9 @@
 package pnemonic.clock_always_on
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -11,7 +13,8 @@ import java.text.DateFormat
 fun DigitalDate(
     time: Long,
     style: Int = DateFormat.DEFAULT,
-    textColor: Color = Color.White
+    textColor: Color = Color.White,
+    onClick: IntCallback? = null
 ) {
     val formatter = DateFormat.getDateInstance(style)
     val text = formatter.format(time)
@@ -19,7 +22,10 @@ fun DigitalDate(
     Text(
         text = text,
         fontSize = 20.sp,
-        color = textColor
+        color = textColor,
+        modifier = Modifier.clickable {
+            onClick?.invoke(style)
+        }
     )
 }
 

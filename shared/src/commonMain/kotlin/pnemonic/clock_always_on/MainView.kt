@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
+import java.text.DateFormat
 
 @Composable
 fun MainView() {
@@ -85,7 +86,16 @@ fun MainView() {
             )
             if (configuration.isDate) {
                 Spacer(modifier = Modifier.height(8.dp))
-                DateView()
+                DateView(
+                    style = configuration.dateStyle,
+                    onClick = { style ->
+                        var styleNext = style + 1
+                        if (styleNext > DateFormat.SHORT) {
+                            styleNext = DateFormat.FULL
+                        }
+                        scope.launch { ccd.setDateStyle(styleNext) }
+                    }
+                )
             }
             if (configuration.isBattery) {
                 Spacer(modifier = Modifier.height(8.dp))
