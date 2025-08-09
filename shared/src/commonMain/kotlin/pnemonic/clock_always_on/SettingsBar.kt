@@ -164,11 +164,39 @@ private fun IconButtonTextColor(color: Color, onClick: ColorCallback) {
     }
 }
 
+private val backgroundColors = arrayOf(
+    Color.Black,
+    Color.DarkGray,
+    Color(0xFF021526),
+    Color(0xFF070F2B),
+    Color(0xFF090040),
+    Color(0xFF09122C),
+    Color(0xFF0C0C0C),
+    Color(0xFF0F0F0F),
+    Color(0xFF17153B),
+    Color(0xFF181C14),
+    Color(0xFF18230F),
+    Color(0xFF1A120B),
+    Color(0xFF1A1A1A),
+    Color(0xFF1D1616),
+    Color(0xFF1E201E),
+    Color(0xFF210F37),
+    Color(0xFF22092C),
+    Color(0xFF222831),
+    Color(0xFF3A0519),
+    Color.Transparent
+)
+
 @Composable
 private fun IconButtonBackgroundColor(color: Color, onClick: ColorCallback) {
+    val colorIndex = backgroundColors.indexOf(color)
+
     IconButton(
-        onClick = { onClick.invoke(color) },
-        enabled = false
+        onClick = {
+            val colorIndexNext = (colorIndex + 1) % backgroundColors.size
+            val colorNext = backgroundColors[colorIndexNext]
+            onClick.invoke(colorNext)
+        }
     ) {
         Icon(
             modifier = Modifier.size(buttonSize),

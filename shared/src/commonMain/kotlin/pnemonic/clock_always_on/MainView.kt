@@ -64,8 +64,7 @@ fun MainView() {
             //TODO scope.launch { ccd.setTextColor(it) }
         }
         override val onBackgroundClick: ColorCallback = {
-            //TODO show color picker
-            //TODO scope.launch { ccd.setBackgroundColor(it) }
+            scope.launch { ccd.setBackgroundColor(it) }
         }
     }
 
