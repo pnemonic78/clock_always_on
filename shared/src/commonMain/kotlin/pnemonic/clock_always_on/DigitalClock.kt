@@ -5,6 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import java.text.SimpleDateFormat
@@ -29,7 +30,10 @@ fun DigitalClock(
     Text(
         text = text,
         fontSize = 80.sp,
-        color = textColor
+        color = textColor,
+        textAlign = TextAlign.Center,
+        maxLines = 1,
+        softWrap = false
     )
 }
 

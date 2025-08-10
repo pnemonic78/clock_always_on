@@ -104,8 +104,7 @@ private fun IconButtonSeconds(selected: Boolean, onClick: BooleanCallback) {
 @Composable
 private fun IconButtonBounce(selected: Boolean, onClick: BooleanCallback) {
     IconButton(
-        onClick = { onClick.invoke(!selected) },
-        enabled = false
+        onClick = { onClick.invoke(!selected) }
     ) {
         Icon(
             modifier = Modifier.size(buttonSize),

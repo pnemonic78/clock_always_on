@@ -5,6 +5,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import java.text.DateFormat
@@ -16,13 +18,15 @@ fun DigitalDate(
     textColor: Color = Color.White,
     onClick: IntCallback? = null
 ) {
-    val formatter = DateFormat.getDateInstance(style)
+    val locale = Locale.current.platformLocale
+    val formatter = DateFormat.getDateInstance(style, locale)
     val text = formatter.format(time)
 
     Text(
         text = text,
         fontSize = 20.sp,
         color = textColor,
+        textAlign = TextAlign.Center,
         modifier = Modifier.clickable {
             onClick?.invoke(style)
         }
