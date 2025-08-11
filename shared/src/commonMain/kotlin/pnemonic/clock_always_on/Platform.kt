@@ -9,6 +9,7 @@ interface Platform {
     val is24Hours: Boolean
     fun getBestDateTimePattern(locale: Locale, skeleton: String): String
     fun getBatteryState(): Flow<BatteryState>
+    fun getDataStorePreferences(): DataStorePreferences
 }
 
 //expect fun getPlatform(): Platform

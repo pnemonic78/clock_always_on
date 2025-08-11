@@ -38,6 +38,7 @@ kotlin {
             api(libs.compose.ui.tooling.preview)
             api(libs.datastore)
             api(libs.datastore.preferences)
+            api(libs.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

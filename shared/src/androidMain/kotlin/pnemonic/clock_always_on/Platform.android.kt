@@ -13,6 +13,9 @@ import java.util.Locale
 private const val delayBattery = DateUtils.SECOND_IN_MILLIS * 30
 
 class AndroidPlatform(private val context: Context) : Platform {
+
+    private var dataStore: DataStorePreferences? = null
+
     override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
 
     override val is24Hours: Boolean get() = DateFormat.is24HourFormat(context)
@@ -28,9 +31,16 @@ class AndroidPlatform(private val context: Context) : Platform {
             delay(delayBattery)
         }
     }
-}
 
-//actual fun getPlatform(): Platform = AndroidPlatform()
+    override fun getDataStorePreferences(): DataStorePreferences {
+        var ds = dataStore
+        if (ds == null) {
+            ds = createDataStore(context)
+            dataStore = ds
+        }
+        return ds
+    }
+}
 
 @Composable
 actual fun rememberPlatform(): Platform {

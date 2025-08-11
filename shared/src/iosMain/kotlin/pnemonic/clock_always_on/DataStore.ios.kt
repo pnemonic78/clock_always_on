@@ -15,8 +15,3 @@ private fun createDataStore(): DataStorePreferences = createDataStore(
         requireNotNull(documentDirectory).path + "/$dataStoreFileName"
     }
 )
-
-@Composable
-actual fun rememberDataStore(): DataStorePreferences {
-    return remember { createDataStore() }
-}
