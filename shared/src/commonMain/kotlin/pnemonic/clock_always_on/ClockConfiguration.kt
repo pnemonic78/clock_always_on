@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 import java.text.DateFormat
 
 data class ClockConfiguration(
-    val isDigital: Boolean = true,
+    val timeStyle: Int = ClockStyle.DIGITAL_STACKED_THIN,
     val is24Hours: Boolean = false,
     val isSeconds: Boolean = false,
     val isDate: Boolean = true,

@@ -17,7 +17,7 @@ class ClockConfigurationData(
         val config = ClockConfiguration()
         return dataStore.data.map { p ->
             config.copy(
-                isDigital = p[booleanPreferencesKey(KEY_DIGITAL)] ?: config.isDigital,
+                timeStyle = p[intPreferencesKey(KEY_TIME_STYLE)] ?: config.timeStyle,
                 is24Hours = p[booleanPreferencesKey(KEY_24)] ?: config.is24Hours,
                 isSeconds = p[booleanPreferencesKey(KEY_SECONDS)] ?: config.isSeconds,
                 isDate = p[booleanPreferencesKey(KEY_DATE)] ?: config.isDate,
@@ -59,6 +59,12 @@ class ClockConfigurationData(
         }
     }
 
+    suspend fun setTimeStyle(value: Int) {
+        dataStore.edit {
+            it[intPreferencesKey(KEY_TIME_STYLE)] = value
+        }
+    }
+
     suspend fun setBattery(value: Boolean) {
         dataStore.edit {
             it[booleanPreferencesKey(KEY_BATTERY)] = value
@@ -84,7 +90,7 @@ class ClockConfigurationData(
     }
 
     companion object {
-        private const val KEY_DIGITAL = "digital"
+        private const val KEY_TIME_STYLE = "timeStyle"
         private const val KEY_24 = "24"
         private const val KEY_SECONDS = "seconds"
         private const val KEY_DATE = "date"

@@ -25,7 +25,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
@@ -41,7 +40,6 @@ private var deltaBouncePx = 5f
 
 @Composable
 fun MainView() {
-    val locale = Locale.current.platformLocale
     val scope = rememberCoroutineScope()
     val platform = rememberPlatform()
     val dataStore = rememberDataStore()
@@ -49,12 +47,6 @@ fun MainView() {
     val configuration by ccd.configuration().collectAsState(
         ClockConfiguration(is24Hours = platform.is24Hours)
     )
-    val skeleton = if (configuration.is24Hours) {
-        if (configuration.isSeconds) "Hms" else "Hm"
-    } else {
-        if (configuration.isSeconds) "hms" else "hm"
-    }
-    val timePattern = platform.getBestDateTimePattern(locale, skeleton)
     val batteryStateFlow = if (configuration.isBattery) {
         platform.getBatteryState()
     } else {
@@ -115,20 +107,33 @@ fun MainView() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             ClockView(
-                isDigital = configuration.isDigital,
-                pattern = timePattern,
-                textColor = configuration.textColor
+                platform = platform,
+                style = configuration.timeStyle,
+                is24Hours = configuration.is24Hours,
+                isSeconds = configuration.isSeconds,
+                textColor = configuration.textColor,
+                onClick = { style ->
+                    scope.launch {
+                        var styleNext = style + 1
+                        if (styleNext > ClockStyle.ANALOG) {
+                            styleNext = ClockStyle.DIGITAL_STACKED_THIN
+                        }
+                        ccd.setTimeStyle(styleNext)
+                    }
+                }
             )
             if (configuration.isDate) {
                 Spacer(modifier = Modifier.height(8.dp))
                 DateView(
                     style = configuration.dateStyle,
                     onClick = { style ->
-                        var styleNext = style + 1
-                        if (styleNext > DateFormat.SHORT) {
-                            styleNext = DateFormat.FULL
+                        scope.launch {
+                            var styleNext = style + 1
+                            if (styleNext > DateFormat.SHORT) {
+                                styleNext = DateFormat.FULL
+                            }
+                            ccd.setDateStyle(styleNext)
                         }
-                        scope.launch { ccd.setDateStyle(styleNext) }
                     }
                 )
             }

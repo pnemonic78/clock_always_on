@@ -11,7 +11,10 @@ import kotlinx.coroutines.delay
 import java.text.DateFormat
 
 @Composable
-fun DateView(style: Int = DateFormat.DEFAULT, onClick: IntCallback? = null) {
+fun DateView(
+    style: Int = DateFormat.DEFAULT,
+    onClick: IntCallback? = null
+) {
     var time by remember { mutableLongStateOf(System.currentTimeMillis()) }
 
     DigitalDate(
