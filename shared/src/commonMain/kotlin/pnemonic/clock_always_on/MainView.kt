@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
@@ -42,44 +43,49 @@ fun MainView() {
         }
     }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = configuration.backgroundColor)
-            .onSizeChanged { viewModel.updateBounce(screenSize = it) }
     ) {
-        Column(
+        Box(
             modifier = Modifier
-                .align(Alignment.Center)
-                .onGloballyPositioned { coordinates ->
-                    val offset = coordinates.positionInParent()
-                    viewModel.updateBounce(box = Rect(offset, coordinates.size.toSize()))
-                }
-                .offset { bounce.offset },
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .fillMaxWidth()
+                .weight(weight = 1f)
+                .onSizeChanged { viewModel.updateBounce(screenSize = it) }
         ) {
-            ClockView(
-                platform = platform,
-                style = configuration.timeStyle,
-                is24Hours = configuration.is24Hours,
-                isSeconds = configuration.isSeconds,
-                textColor = configuration.textColor,
-                onClick = { viewModel.onClockClick(it) }
-            )
-            if (configuration.isDate) {
-                Spacer(modifier = Modifier.height(8.dp))
-                DateView(
-                    style = configuration.dateStyle,
-                    onClick = { viewModel.onDateClick(it) }
+            Column(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .onGloballyPositioned { coordinates ->
+                        val offset = coordinates.positionInParent()
+                        viewModel.updateBounce(box = Rect(offset, coordinates.size.toSize()))
+                    }
+                    .offset { bounce.offset },
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                ClockView(
+                    platform = platform,
+                    style = configuration.timeStyle,
+                    is24Hours = configuration.is24Hours,
+                    isSeconds = configuration.isSeconds,
+                    textColor = configuration.textColor,
+                    onClick = { viewModel.onClockClick(it) }
                 )
-            }
-            if (configuration.isBattery) {
-                Spacer(modifier = Modifier.height(8.dp))
-                BatteryStatus(batteryState)
+                if (configuration.isDate) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    DateView(
+                        style = configuration.dateStyle,
+                        onClick = { viewModel.onDateClick(it) }
+                    )
+                }
+                if (configuration.isBattery) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    BatteryStatus(batteryState)
+                }
             }
         }
         SettingsBar(
-            modifier = Modifier.align(Alignment.BottomCenter),
             configuration = configuration,
             listener = viewModel
         )
