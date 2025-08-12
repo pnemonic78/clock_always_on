@@ -76,7 +76,7 @@ class ClockViewModel(
     fun onClockClick(style: Int) {
         scope.launch {
             var styleNext = style + 1
-            if (styleNext > ClockStyle.ANALOG) {
+            if (styleNext > ClockStyle.ANALOG_TICKS) {
                 styleNext = ClockStyle.DIGITAL_STACKED_THIN
             }
             configData.setTimeStyle(styleNext)
