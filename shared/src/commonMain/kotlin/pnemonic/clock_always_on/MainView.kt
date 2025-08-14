@@ -76,12 +76,13 @@ fun MainView() {
                     Spacer(modifier = Modifier.height(8.dp))
                     DateView(
                         style = configuration.dateStyle,
+                        color = configuration.textColor,
                         onClick = { viewModel.onDateClick(it) }
                     )
                 }
                 if (configuration.isBattery) {
                     Spacer(modifier = Modifier.height(8.dp))
-                    BatteryStatus(batteryState)
+                    BatteryStatus(batteryState, color = configuration.textColor)
                 }
             }
         }

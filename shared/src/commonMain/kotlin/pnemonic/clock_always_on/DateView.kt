@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.delay
 import java.text.DateFormat
@@ -13,6 +14,7 @@ import java.text.DateFormat
 @Composable
 fun DateView(
     style: Int = DateFormat.DEFAULT,
+    color: Color = Color.Unspecified,
     onClick: IntCallback? = null
 ) {
     var time by remember { mutableLongStateOf(System.currentTimeMillis()) }
@@ -20,6 +22,7 @@ fun DateView(
     DigitalDate(
         time = time,
         style = style,
+        textColor = color,
         onClick = onClick
     )
 

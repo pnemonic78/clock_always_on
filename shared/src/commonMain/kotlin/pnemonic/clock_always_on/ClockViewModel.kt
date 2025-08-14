@@ -73,6 +73,10 @@ class ClockViewModel(
         scope.launch { configData.setBackgroundColor(color) }
     }
 
+    fun setTextColor(color: Color) {
+        scope.launch { configData.setTextColor(color) }
+    }
+
     fun onClockClick(style: Int) {
         scope.launch {
             var styleNext = style + 1
@@ -108,9 +112,10 @@ class ClockViewModel(
     override val onBounceClick: BooleanCallback = {
         setBounce(it)
     }
-    override val onTextColorClick: ColorCallback = {
-        //TODO show color picker
-        //TODO setTextColor(it)
+    override val onTextColorClick: ColorCallback = { color ->
+        if (color != Color.Unspecified) {
+            setTextColor(color)
+        }
     }
     override val onBackgroundClick: ColorCallback = {
         setBackgroundColor(it)

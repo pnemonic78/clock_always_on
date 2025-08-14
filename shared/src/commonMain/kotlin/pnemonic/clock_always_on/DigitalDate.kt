@@ -15,7 +15,7 @@ import java.text.DateFormat
 fun DigitalDate(
     time: Long,
     style: Int = DateFormat.DEFAULT,
-    textColor: Color = Color.White,
+    textColor: Color = Color.Unspecified,
     onClick: IntCallback? = null
 ) {
     val locale = Locale.current.platformLocale

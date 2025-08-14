@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import clock_always_on.shared.generated.resources.Res
@@ -35,18 +37,18 @@ import java.text.NumberFormat
 private val iconSize = 24.dp
 
 @Composable
-fun BatteryStatus(state: BatteryState) {
+fun BatteryStatus(state: BatteryState, color: Color = Color.Unspecified) {
     val formatter = remember { NumberFormat.getPercentInstance() }
 
     Row {
-        BatteryIcon(state.level, state.charging)
+        BatteryIcon(level = state.level, charging = state.charging, color = color)
         Spacer(modifier = Modifier.width(4.dp))
-        Text(text = formatter.format(state.level / 100f))
+        Text(text = formatter.format(state.level / 100f), color = color)
     }
 }
 
 @Composable
-fun BatteryIcon(level: Int, charging: Boolean) {
+fun BatteryIcon(level: Int, charging: Boolean, color: Color = Color.Unspecified) {
     val painter = when {
         (level < 0) -> painterResource(Res.drawable.ic_battery_unknown)
         charging && (level <= 20) -> painterResource(Res.drawable.ic_battery_charging_20)
@@ -65,10 +67,12 @@ fun BatteryIcon(level: Int, charging: Boolean) {
         (level < 99) -> painterResource(Res.drawable.ic_battery_6_bar)
         else -> painterResource(Res.drawable.ic_battery_full)
     }
+    val tint: ColorFilter? = if (color == Color.Unspecified) null else ColorFilter.tint(color)
 
     Image(
         modifier = Modifier.size(iconSize),
         painter = painter,
+        colorFilter = tint,
         contentDescription = "battery $level"
     )
 }

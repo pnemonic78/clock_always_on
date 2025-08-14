@@ -9,6 +9,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
@@ -48,6 +52,8 @@ fun SettingsBar(
     configuration: ClockConfiguration,
     listener: SettingsBarListener
 ) {
+    var showBottomSheet by remember { mutableStateOf(false) }
+
     Row(modifier = modifier.wrapContentSize()) {
         IconButton24(configuration.is24Hours, onClick = listener.on24HourClick)
         Spacer(modifier = Modifier.width(buttonSpace))
@@ -59,11 +65,20 @@ fun SettingsBar(
         Spacer(modifier = Modifier.width(buttonSpace))
         IconButtonBounce(configuration.isBounce, onClick = listener.onBounceClick)
         Spacer(modifier = Modifier.width(buttonSpace))
-        IconButtonTextColor(configuration.textColor, onClick = listener.onTextColorClick)
+        IconButtonTextColor(configuration.textColor, onClick = { showBottomSheet = true })
         Spacer(modifier = Modifier.width(buttonSpace))
         IconButtonBackgroundColor(
             configuration.backgroundColor,
             onClick = listener.onBackgroundClick
+        )
+    }
+    if (showBottomSheet) {
+        ColorPickerDialog(
+            onColorSelected = {
+                showBottomSheet = false
+                listener.onTextColorClick(it)
+            },
+            onDismissRequest = { showBottomSheet = false }
         )
     }
 }
@@ -152,8 +167,7 @@ private fun IconButtonBattery(selected: Boolean, onClick: BooleanCallback) {
 @Composable
 private fun IconButtonTextColor(color: Color, onClick: ColorCallback) {
     IconButton(
-        onClick = { onClick.invoke(color) },
-        enabled = false
+        onClick = { onClick.invoke(color) }
     ) {
         Icon(
             modifier = Modifier.size(buttonSize),
