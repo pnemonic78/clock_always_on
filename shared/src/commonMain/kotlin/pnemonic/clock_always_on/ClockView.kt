@@ -48,8 +48,7 @@ fun ClockView(
         when (style) {
             ClockStyle.DIGITAL_STACKED,
             ClockStyle.DIGITAL_STACKED_THIN -> {
-                val skeletonHours = if (is24Hours) "HH" else "hh"
-                val patternHours = platform.getBestDateTimePattern(locale, skeletonHours)
+                val patternHours = if (is24Hours) "HH" else "hh"
                 val patternMinutes = "mm"
                 val patternSeconds = if (isSeconds) "ss" else ""
 
