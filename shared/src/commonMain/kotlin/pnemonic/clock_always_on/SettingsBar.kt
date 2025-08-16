@@ -35,6 +35,7 @@ import org.jetbrains.compose.resources.painterResource
 
 private val buttonSize = 40.dp
 private val buttonSpace = 8.dp
+private val buttonColor = Color.White.copy(alpha = 0.8f)
 
 interface SettingsBarListener {
     val on24HourClick: BooleanCallback
@@ -95,7 +96,8 @@ private fun IconButton24(selected: Boolean, onClick: BooleanCallback) {
             text = if (selected) "24" else "12",
             fontSize = textSize,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            color = buttonColor
         )
     }
 }
@@ -111,6 +113,7 @@ private fun IconButtonSeconds(selected: Boolean, onClick: BooleanCallback) {
                 painterResource(Res.drawable.ic_timer)
             else
                 painterResource(Res.drawable.ic_timer_off),
+            tint = buttonColor,
             contentDescription = "seconds"
         )
     }
@@ -127,6 +130,7 @@ private fun IconButtonBounce(selected: Boolean, onClick: BooleanCallback) {
                 painterResource(Res.drawable.ic_animation_on)
             else
                 painterResource(Res.drawable.ic_animation_off),
+            tint = buttonColor,
             contentDescription = "bounce"
         )
     }
@@ -143,6 +147,7 @@ private fun IconButtonDate(selected: Boolean, onClick: BooleanCallback) {
                 painterResource(Res.drawable.ic_date_on)
             else
                 painterResource(Res.drawable.ic_date_off),
+            tint = buttonColor,
             contentDescription = "date"
         )
     }
@@ -159,6 +164,7 @@ private fun IconButtonBattery(selected: Boolean, onClick: BooleanCallback) {
                 painterResource(Res.drawable.ic_battery_on)
             else
                 painterResource(Res.drawable.ic_battery_off),
+            tint = buttonColor,
             contentDescription = "battery"
         )
     }
@@ -172,6 +178,7 @@ private fun IconButtonTextColor(color: Color, onClick: ColorCallback) {
         Icon(
             modifier = Modifier.size(buttonSize),
             painter = painterResource(Res.drawable.ic_color_text),
+            tint = buttonColor,
             contentDescription = "text color"
         )
     }
@@ -214,6 +221,7 @@ private fun IconButtonBackgroundColor(color: Color, onClick: ColorCallback) {
         Icon(
             modifier = Modifier.size(buttonSize),
             painter = painterResource(Res.drawable.ic_color_fill),
+            tint = buttonColor,
             contentDescription = "background color"
         )
     }
