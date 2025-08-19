@@ -80,7 +80,7 @@ fun BatteryIcon(level: Int, charging: Boolean, color: Color = Color.Unspecified)
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         Column {
             BatteryStatus(BatteryState(-1, false))
             BatteryStatus(BatteryState(0, false))

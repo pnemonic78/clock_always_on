@@ -154,7 +154,7 @@ private fun ClockFaceWithTicks(
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         AnalogClockTicks(calendar = Calendar.getInstance())
     }
 }

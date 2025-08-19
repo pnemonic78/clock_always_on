@@ -240,7 +240,7 @@ private fun DefaultPreview() {
         override val onTextColorClick: ColorCallback = {}
         override val onBackgroundClick: ColorCallback = {}
     }
-    MyApplicationTheme {
+    ClockTheme {
         SettingsBar(configuration = configuration, listener = listener)
     }
 }

@@ -36,7 +36,7 @@ fun DigitalDate(
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         DigitalDate(System.currentTimeMillis())
     }
 }

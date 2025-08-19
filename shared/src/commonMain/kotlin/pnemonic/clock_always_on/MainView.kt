@@ -26,7 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun MainView() {
+fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
     val platform = rememberPlatform()
     val viewModel = viewModel { ClockViewModel(platform) }
     val configuration by viewModel.configuration.collectAsState()
@@ -44,8 +44,7 @@ fun MainView() {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = modifier
             .background(color = configuration.backgroundColor)
     ) {
         Box(
@@ -105,7 +104,7 @@ fun MainView() {
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         MainView()
     }
 }

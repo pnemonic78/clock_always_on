@@ -108,7 +108,7 @@ fun DigitalClockStacked(
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         DigitalClockSimple(calendar = Calendar.getInstance())
     }
 }

@@ -35,7 +35,7 @@ fun DateView(
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         DateView()
     }
 }

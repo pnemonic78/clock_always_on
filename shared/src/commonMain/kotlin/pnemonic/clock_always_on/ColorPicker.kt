@@ -86,7 +86,7 @@ fun ColorPickerDialog(onColorSelected: ColorCallback, onDismissRequest: VoidCall
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         ColorPickerGrid(onColorSelected = {
             println("selected $it")
         })

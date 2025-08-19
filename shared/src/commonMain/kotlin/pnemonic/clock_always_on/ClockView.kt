@@ -103,7 +103,7 @@ fun ClockView(
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         val platform = rememberPlatform()
         ClockView(platform = platform)
     }

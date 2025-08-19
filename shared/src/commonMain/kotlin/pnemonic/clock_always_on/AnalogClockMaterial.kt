@@ -78,7 +78,7 @@ fun AnalogClockMaterial(
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    MyApplicationTheme {
+    ClockTheme {
         AnalogClockMaterial(calendar = Calendar.getInstance())
     }
 }
