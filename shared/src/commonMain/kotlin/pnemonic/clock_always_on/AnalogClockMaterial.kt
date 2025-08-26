@@ -2,10 +2,12 @@ package pnemonic.clock_always_on
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,10 +39,15 @@ fun AnalogClockMaterial(
     val secondsHand = painterResource(Res.drawable.second_hand_material)
     val tint: ColorFilter? = if (color == Color.Unspecified) null else ColorFilter.tint(color)
 
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .scale(1.15f)
+    ) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = frame, contentDescription = "frame",
+            painter = frame,
+            contentDescription = "frame",
             colorFilter = tint
         )
         Image(

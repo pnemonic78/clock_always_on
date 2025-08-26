@@ -3,6 +3,7 @@ package pnemonic.clock_always_on
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -41,7 +42,7 @@ fun AnalogClockTicks(
     val secondsHand = painterResource(Res.drawable.second_hand_1)
     val tint: ColorFilter? = if (color == Color.Unspecified) null else ColorFilter.tint(color)
 
-    Box(modifier = modifier) {
+    Box(modifier = modifier.aspectRatio(1f)) {
         ClockFaceWithTicks(
             color = color
         )

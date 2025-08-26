@@ -33,8 +33,8 @@ import clock_always_on.shared.generated.resources.ic_timer
 import clock_always_on.shared.generated.resources.ic_timer_off
 import org.jetbrains.compose.resources.painterResource
 
-private val buttonSize = 40.dp
-private val buttonSpace = 8.dp
+private val buttonSize = 36.dp
+private val buttonSpace = 4.dp
 private val buttonColor = Color.White.copy(alpha = 0.8f)
 
 interface SettingsBarListener {

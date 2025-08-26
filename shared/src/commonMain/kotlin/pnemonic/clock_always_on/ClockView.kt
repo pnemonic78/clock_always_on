@@ -26,7 +26,7 @@ object ClockStyle {
     const val ANALOG_TICKS = 5
 }
 
-private val clockSize = 300.dp
+private val clockSize = 260.dp
 
 @Composable
 fun ClockView(
@@ -42,9 +42,7 @@ fun ClockView(
     val calendar = remember { Calendar.getInstance(locale) }
     calendar.timeInMillis = time
 
-    Box(modifier = Modifier.clickable {
-        onClick?.invoke(style)
-    }) {
+    Box(modifier = Modifier.clickable { onClick?.invoke(style) }) {
         when (style) {
             ClockStyle.DIGITAL_STACKED,
             ClockStyle.DIGITAL_STACKED_THIN -> {
