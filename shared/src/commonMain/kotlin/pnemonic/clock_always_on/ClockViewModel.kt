@@ -51,13 +51,18 @@ class ClockViewModel(
                 BatteryState()
             )
 
+    private val _settingsVisible = MutableStateFlow<Boolean>(true)
+    val settingsVisible: StateFlow<Boolean> = _settingsVisible
+    private var settingsVisibleJob: Job? = null
+
     init {
         viewModelScope.launch {
-            // reading the state is not immediate.
+            // reading the configuration is not immediate.
             delay(1000)
             if (configuration.value.isBounce) {
                 startBounce()
             }
+            fadeSettingsBar()
         }
     }
 
@@ -226,11 +231,42 @@ class ClockViewModel(
         super.onCleared()
         bounceJob?.cancel()
         bounceJob = null
+        settingsVisibleJob?.cancel()
+        settingsVisibleJob = null
+    }
+
+    fun onMainViewClick() {
+        showSettingsBar()
+    }
+
+    fun onSettingsBarClick() {
+        showSettingsBar()
+    }
+
+    private fun showSettingsBar() {
+        settingsVisibleJob?.cancel()
+        viewModelScope.launch {
+            _settingsVisible.emit(true)
+            fadeSettingsBar()
+        }
+    }
+
+    private fun hideSettingsBar() {
+        viewModelScope.launch {
+            _settingsVisible.emit(false)
+        }
+    }
+
+    private fun fadeSettingsBar() {
+        settingsVisibleJob = viewModelScope.launch {
+            delay(settingsVisibilityWait)
+            _settingsVisible.emit(false)
+        }
     }
 
     companion object {
         private const val bounceDelay = DateUtils.SECOND_IN_MILLIS
-        private const val settingsVisibilityDelay = DateUtils.SECOND_IN_MILLIS * 5
-        private const val settingsVisibilityHide = (DateUtils.SECOND_IN_MILLIS * 5).toInt()
+        private const val settingsVisibilityWait = DateUtils.SECOND_IN_MILLIS * 5
+        const val settingsFade = (DateUtils.SECOND_IN_MILLIS * 5).toInt()
     }
 }

@@ -1,6 +1,11 @@
 package pnemonic.clock_always_on
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -40,11 +45,13 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
         }
     }
 
+    val settingsVisible by viewModel.settingsVisible.collectAsState()
+
     Box(
         modifier = modifier
             .background(color = configuration.backgroundColor)
-            //.clickable { settingsVisible = true }
             .onSizeChanged { viewModel.updateBounce(screenSize = it) }
+            .clickable { viewModel.onMainViewClick() }
     ) {
         Column(
             modifier = Modifier
@@ -77,14 +84,23 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
                 BatteryStatus(batteryState, color = configuration.textColor)
             }
         }
-        SettingsBar(
+        AnimatedVisibility(
             modifier = Modifier
                 .align(Alignment.BottomCenter),
-//                .clickable { settingsVisible = true }
-//                .graphicsLayer { alpha = settingsVisibility },
-            configuration = configuration,
-            listener = viewModel
-        )
+            visible = settingsVisible,
+            enter = fadeIn(),
+            exit = fadeOut(
+                animationSpec = tween(durationMillis = ClockViewModel.settingsFade)
+            ),
+            label = "settings"
+        ) {
+            SettingsBar(
+                modifier = Modifier
+                    .clickable { viewModel.onSettingsBarClick() },
+                configuration = configuration,
+                listener = viewModel
+            )
+        }
     }
 }
 
