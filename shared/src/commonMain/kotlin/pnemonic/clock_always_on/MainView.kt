@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlinx.coroutines.delay
 
 @Composable
 fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
@@ -43,61 +40,51 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
         }
     }
 
-    Column(
+    Box(
         modifier = modifier
             .background(color = configuration.backgroundColor)
+            //.clickable { settingsVisible = true }
+            .onSizeChanged { viewModel.updateBounce(screenSize = it) }
     ) {
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(weight = 1f)
-                .onSizeChanged { viewModel.updateBounce(screenSize = it) }
+                .align(Alignment.Center)
+                .onGloballyPositioned { coordinates ->
+                    val offset = coordinates.positionInParent()
+                    viewModel.updateBounce(box = Rect(offset, coordinates.size.toSize()))
+                }
+                .offset { bounce.offset },
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Column(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .onGloballyPositioned { coordinates ->
-                        val offset = coordinates.positionInParent()
-                        viewModel.updateBounce(box = Rect(offset, coordinates.size.toSize()))
-                    }
-                    .offset { bounce.offset },
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                ClockView(
-                    platform = platform,
-                    style = configuration.timeStyle,
-                    is24Hours = configuration.is24Hours,
-                    isSeconds = configuration.isSeconds,
-                    textColor = configuration.textColor,
-                    onClick = { viewModel.onClockClick(it) }
+            ClockView(
+                platform = platform,
+                style = configuration.timeStyle,
+                is24Hours = configuration.is24Hours,
+                isSeconds = configuration.isSeconds,
+                textColor = configuration.textColor,
+                onClick = { viewModel.onClockClick(it) }
+            )
+            if (configuration.isDate) {
+                Spacer(modifier = Modifier.height(8.dp))
+                DateView(
+                    style = configuration.dateStyle,
+                    color = configuration.textColor,
+                    onClick = { viewModel.onDateClick(it) }
                 )
-                if (configuration.isDate) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    DateView(
-                        style = configuration.dateStyle,
-                        color = configuration.textColor,
-                        onClick = { viewModel.onDateClick(it) }
-                    )
-                }
-                if (configuration.isBattery) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    BatteryStatus(batteryState, color = configuration.textColor)
-                }
+            }
+            if (configuration.isBattery) {
+                Spacer(modifier = Modifier.height(8.dp))
+                BatteryStatus(batteryState, color = configuration.textColor)
             }
         }
         SettingsBar(
+            modifier = Modifier
+                .align(Alignment.BottomCenter),
+//                .clickable { settingsVisible = true }
+//                .graphicsLayer { alpha = settingsVisibility },
             configuration = configuration,
             listener = viewModel
         )
-    }
-
-    if (configuration.isBounce) {
-        LaunchedEffect(bounce) {
-            delay(DateUtils.SECOND_IN_MILLIS)
-            viewModel.bounce()
-        }
-    } else {
-        viewModel.resetBounce()
     }
 }
 

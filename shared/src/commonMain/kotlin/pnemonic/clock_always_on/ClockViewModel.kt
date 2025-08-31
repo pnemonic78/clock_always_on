@@ -7,11 +7,14 @@ import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.text.DateFormat
 
@@ -24,14 +27,13 @@ class ClockViewModel(
 
     val configuration: StateFlow<ClockConfiguration> = configData.configuration().stateIn(
         scope,
-        SharingStarted.Lazily,
-        ClockConfiguration(
-            is24Hours = platform.is24Hours
-        )
+        SharingStarted.Eagerly,
+        ClockConfiguration(is24Hours = platform.is24Hours)
     )
 
     private val _bounce = MutableStateFlow<Bounce>(Bounce())
     val bounces: StateFlow<Bounce> = _bounce
+    private var bounceJob: Job? = null
 
     var bounce: Bounce
         get() = _bounce.value
@@ -48,6 +50,16 @@ class ClockViewModel(
                 SharingStarted.Lazily,
                 BatteryState()
             )
+
+    init {
+        viewModelScope.launch {
+            // reading the state is not immediate.
+            delay(1000)
+            if (configuration.value.isBounce) {
+                startBounce()
+            }
+        }
+    }
 
     fun set24Hours(visible: Boolean) {
         scope.launch { configData.set24Hours(visible) }
@@ -66,7 +78,14 @@ class ClockViewModel(
     }
 
     fun setBounce(enabled: Boolean) {
-        scope.launch { configData.setBounce(enabled) }
+        scope.launch {
+            configData.setBounce(enabled)
+            if (enabled) {
+                startBounce()
+            } else {
+                stopBounce()
+            }
+        }
     }
 
     fun setBackgroundColor(color: Color) {
@@ -147,7 +166,17 @@ class ClockViewModel(
         )
     }
 
-    fun bounce() {
+    fun startBounce() {
+        if (bounceJob?.isActive == true) return
+        bounceJob = viewModelScope.launch {
+            while (isActive && configuration.value.isBounce) {
+                delay(bounceDelay)
+                bounce()
+            }
+        }
+    }
+
+    private fun bounce() {
         val bounce = this.bounce
         var deltaX = bounce.deltaX
         var deltaY = bounce.deltaY
@@ -184,11 +213,24 @@ class ClockViewModel(
         )
     }
 
-    fun resetBounce() {
+    fun stopBounce() {
+        bounceJob?.cancel()
         bounce = Bounce(
             screenSize = bounce.screenSize,
             deltaX = deltaBouncePx,
             deltaY = deltaBouncePx
         )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        bounceJob?.cancel()
+        bounceJob = null
+    }
+
+    companion object {
+        private const val bounceDelay = DateUtils.SECOND_IN_MILLIS
+        private const val settingsVisibilityDelay = DateUtils.SECOND_IN_MILLIS * 5
+        private const val settingsVisibilityHide = (DateUtils.SECOND_IN_MILLIS * 5).toInt()
     }
 }
