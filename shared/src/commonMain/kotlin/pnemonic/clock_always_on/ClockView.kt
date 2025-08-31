@@ -2,7 +2,7 @@ package pnemonic.clock_always_on
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,10 +26,12 @@ object ClockStyle {
     const val ANALOG_TICKS = 5
 }
 
-private val clockSize = 260.dp
+private val clockSizeMin = 150.dp
+private val clockSizeMax = 300.dp
 
 @Composable
 fun ClockView(
+    modifier: Modifier = Modifier,
     platform: Platform,
     style: Int = ClockStyle.DIGITAL_STACKED_THIN,
     is24Hours: Boolean = false,
@@ -42,7 +44,9 @@ fun ClockView(
     val calendar = remember { Calendar.getInstance(locale) }
     calendar.timeInMillis = time
 
-    Box(modifier = Modifier.clickable { onClick?.invoke(style) }) {
+    Box(
+        modifier = modifier
+            .clickable { onClick?.invoke(style) }) {
         when (style) {
             ClockStyle.DIGITAL_STACKED,
             ClockStyle.DIGITAL_STACKED_THIN -> {
@@ -61,14 +65,25 @@ fun ClockView(
             }
 
             ClockStyle.ANALOG_SIMPLE -> AnalogClockMaterial(
-                modifier = Modifier.size(clockSize),
+                modifier = Modifier.sizeIn(
+                    minWidth = clockSizeMin,
+                    maxWidth = clockSizeMax,
+                    minHeight = clockSizeMin,
+                    maxHeight = clockSizeMax
+                ),
                 calendar = calendar,
                 isSeconds = isSeconds,
                 color = textColor
             )
 
             ClockStyle.ANALOG_TICKS -> AnalogClockTicks(
-                modifier = Modifier.size(clockSize),
+                modifier = Modifier
+                    .sizeIn(
+                        minWidth = clockSizeMin,
+                        maxWidth = clockSizeMax,
+                        minHeight = clockSizeMin,
+                        maxHeight = clockSizeMax
+                    ),
                 calendar = calendar,
                 isSeconds = isSeconds,
                 color = textColor
