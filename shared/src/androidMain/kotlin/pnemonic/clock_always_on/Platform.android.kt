@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.Locale
 
-private const val delayBattery = DateUtils.SECOND_IN_MILLIS * 30
+private const val delayBattery = DateUtils.SECOND_IN_MILLIS * 5
 
 class AndroidPlatform(private val context: Context) : Platform {
 
