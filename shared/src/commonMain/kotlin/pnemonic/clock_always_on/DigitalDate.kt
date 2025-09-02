@@ -14,6 +14,7 @@ import java.text.DateFormat
 @Composable
 fun DigitalDate(
     time: Long,
+    modifier: Modifier = Modifier,
     style: Int = DateFormat.DEFAULT,
     textColor: Color = Color.Unspecified,
     onClick: IntCallback? = null
@@ -23,13 +24,13 @@ fun DigitalDate(
     val text = formatter.format(time)
 
     Text(
+        modifier = modifier.clickable {
+            onClick?.invoke(style)
+        },
         text = text,
         fontSize = 20.sp,
         color = textColor,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.clickable {
-            onClick?.invoke(style)
-        }
+        textAlign = TextAlign.Center
     )
 }
 

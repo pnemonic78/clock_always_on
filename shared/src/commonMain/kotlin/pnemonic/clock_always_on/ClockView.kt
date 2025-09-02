@@ -2,7 +2,7 @@ package pnemonic.clock_always_on
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import java.util.Calendar
@@ -26,8 +27,8 @@ object ClockStyle {
     const val ANALOG_TICKS = 5
 }
 
-private val clockSizeMin = 150.dp
-private val clockSizeMax = 300.dp
+val clockSizeMin = 150.dp
+val clockSizeMax = 350.dp
 
 @Composable
 fun ClockView(
@@ -37,12 +38,15 @@ fun ClockView(
     is24Hours: Boolean = false,
     isSeconds: Boolean = false,
     textColor: Color = Color.Unspecified,
-    onClick: IntCallback? = null
+    onClick: IntCallback? = null,
+    size: Dp? = null
 ) {
     val locale = Locale.current.platformLocale
     var time by remember { mutableLongStateOf(System.currentTimeMillis()) }
     val calendar = remember { Calendar.getInstance(locale) }
     calendar.timeInMillis = time
+
+    val sizeDp = size ?: clockSizeMin
 
     Box(
         modifier = modifier
@@ -65,25 +69,14 @@ fun ClockView(
             }
 
             ClockStyle.ANALOG_SIMPLE -> AnalogClockMaterial(
-                modifier = Modifier.sizeIn(
-                    minWidth = clockSizeMin,
-                    maxWidth = clockSizeMax,
-                    minHeight = clockSizeMin,
-                    maxHeight = clockSizeMax
-                ),
+                modifier = Modifier.size(sizeDp),
                 calendar = calendar,
                 isSeconds = isSeconds,
                 color = textColor
             )
 
             ClockStyle.ANALOG_TICKS -> AnalogClockTicks(
-                modifier = Modifier
-                    .sizeIn(
-                        minWidth = clockSizeMin,
-                        maxWidth = clockSizeMax,
-                        minHeight = clockSizeMin,
-                        maxHeight = clockSizeMax
-                    ),
+                modifier = Modifier.size(sizeDp),
                 calendar = calendar,
                 isSeconds = isSeconds,
                 color = textColor

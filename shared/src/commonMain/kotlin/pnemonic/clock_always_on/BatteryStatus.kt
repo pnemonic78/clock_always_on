@@ -37,10 +37,14 @@ import java.text.NumberFormat
 private val iconSize = 24.dp
 
 @Composable
-fun BatteryStatus(state: BatteryState, color: Color = Color.Unspecified) {
+fun BatteryStatus(
+    state: BatteryState,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified
+) {
     val formatter = remember { NumberFormat.getPercentInstance() }
 
-    Row {
+    Row(modifier = modifier) {
         BatteryIcon(level = state.level, charging = state.charging, color = color)
         Spacer(modifier = Modifier.width(4.dp))
         Text(text = formatter.format(state.level / 100f), color = color)

@@ -149,7 +149,7 @@ class ClockViewModel(
         bounce = bounce.copy(deltaX = deltaX, deltaY = deltaY)
     }
 
-    fun updateBounce(screenSize: IntSize) {
+    fun setScreenSize(screenSize: IntSize) {
         bounce = bounce.copy(screenSize = screenSize)
     }
 
