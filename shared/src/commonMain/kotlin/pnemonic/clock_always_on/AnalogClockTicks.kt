@@ -31,10 +31,11 @@ fun AnalogClockTicks(
     color: Color = Color.Unspecified
 ) {
     val hours = calendar.get(Calendar.HOUR)
-    val hoursAngle = (hours * 360f) / 12f
     val minutes = calendar.get(Calendar.MINUTE)
+    val millis = calendar.get(Calendar.MILLISECOND)
+    val seconds = calendar.get(Calendar.SECOND) + (millis / 1000f)
+    val hoursAngle = (hours * 360f) / 12f
     val minutesAngle = (minutes * 360f) / 60f
-    val seconds = calendar.get(Calendar.SECOND)
     val secondsAngle = (seconds * 360f) / 60f
 
     val hoursHand = painterResource(Res.drawable.hour_hand_1)

@@ -58,7 +58,7 @@ class ClockViewModel(
     init {
         viewModelScope.launch {
             // reading the configuration is not immediate.
-            delay(1000)
+            delay(DateUtils.SECOND_IN_MILLIS / 2)
             if (configuration.value.isBounce) {
                 startBounce()
             }

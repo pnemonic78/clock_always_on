@@ -108,7 +108,13 @@ fun ClockView(
     }
 
     LaunchedEffect(time) {
-        delay(DateUtils.SECOND_IN_MILLIS)
+        when (style) {
+            // Smooth ticks like sliding
+            ClockStyle.ANALOG_SIMPLE,
+            ClockStyle.ANALOG_TICKS -> delay(100)
+
+            else -> delay(DateUtils.SECOND_IN_MILLIS)
+        }
         time = System.currentTimeMillis()
     }
 }
