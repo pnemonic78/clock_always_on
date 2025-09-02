@@ -90,7 +90,7 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
             visible = settingsVisible,
             enter = fadeIn(),
             exit = fadeOut(
-                animationSpec = tween(durationMillis = ClockViewModel.settingsFade)
+                animationSpec = tween(durationMillis = ClockViewModel.SETTINGS_FADE)
             ),
             label = "settings"
         ) {

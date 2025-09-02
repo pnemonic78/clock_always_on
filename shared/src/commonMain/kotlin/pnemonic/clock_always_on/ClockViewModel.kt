@@ -175,7 +175,7 @@ class ClockViewModel(
         if (bounceJob?.isActive == true) return
         bounceJob = viewModelScope.launch {
             while (isActive && configuration.value.isBounce) {
-                delay(bounceDelay)
+                delay(BOUNCE_DELAY)
                 bounce()
             }
         }
@@ -259,14 +259,14 @@ class ClockViewModel(
 
     private fun fadeSettingsBar() {
         settingsVisibleJob = viewModelScope.launch {
-            delay(settingsVisibilityWait)
+            delay(SETTINGS_VISIBILITY_WAIT)
             _settingsVisible.emit(false)
         }
     }
 
     companion object {
-        private const val bounceDelay = DateUtils.SECOND_IN_MILLIS
-        private const val settingsVisibilityWait = DateUtils.SECOND_IN_MILLIS * 5
-        const val settingsFade = (DateUtils.SECOND_IN_MILLIS * 5).toInt()
+        private const val BOUNCE_DELAY = DateUtils.SECOND_IN_MILLIS
+        private const val SETTINGS_VISIBILITY_WAIT = DateUtils.SECOND_IN_MILLIS * 5
+        const val SETTINGS_FADE = (DateUtils.SECOND_IN_MILLIS * 5).toInt()
     }
 }
