@@ -21,8 +21,8 @@ import java.util.Calendar
 
 @Composable
 fun AnalogClockMaterial(
-    modifier: Modifier = Modifier,
     calendar: Calendar,
+    modifier: Modifier = Modifier,
     isSeconds: Boolean = false,
     color: Color = Color.Unspecified
 ) {

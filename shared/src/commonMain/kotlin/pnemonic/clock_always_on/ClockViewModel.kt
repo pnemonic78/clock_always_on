@@ -42,7 +42,7 @@ class ClockViewModel(
             scope.launch { _bounce.emit(value) }
         }
 
-    val batteryState: StateFlow<BatteryState> =
+    val battery: StateFlow<BatteryState> =
         platform.getBatteryState()
             .filter { configuration.value.isBattery }
             .stateIn(
@@ -55,14 +55,19 @@ class ClockViewModel(
     val settingsVisible: StateFlow<Boolean> = _settingsVisible
     private var settingsVisibleJob: Job? = null
 
+    private val _time = MutableStateFlow<Long>(System.currentTimeMillis())
+    val time: StateFlow<Long> = _time
+    private var timeJob: Job? = null
+
     init {
+        startTimer()
         viewModelScope.launch {
             // reading the configuration is not immediate.
             delay(DateUtils.SECOND_IN_MILLIS / 2)
             if (configuration.value.isBounce) {
                 startBounce()
             }
-            fadeSettingsBar()
+            hideSettingsBar()
         }
     }
 
@@ -229,6 +234,7 @@ class ClockViewModel(
 
     override fun onCleared() {
         super.onCleared()
+        stopTimer()
         bounceJob?.cancel()
         bounceJob = null
         settingsVisibleJob?.cancel()
@@ -247,26 +253,44 @@ class ClockViewModel(
         settingsVisibleJob?.cancel()
         viewModelScope.launch {
             _settingsVisible.emit(true)
-            fadeSettingsBar()
+            hideSettingsBar()
         }
     }
 
     private fun hideSettingsBar() {
-        viewModelScope.launch {
-            _settingsVisible.emit(false)
-        }
-    }
-
-    private fun fadeSettingsBar() {
         settingsVisibleJob = viewModelScope.launch {
             delay(SETTINGS_VISIBILITY_WAIT)
             _settingsVisible.emit(false)
         }
     }
 
+    private fun startTimer() {
+        timeJob?.cancel()
+        timeJob = viewModelScope.launch {
+            while (isActive) {
+                val style = configuration.value.timeStyle
+                when (style) {
+                    // Smooth ticks like sliding
+                    ClockStyle.ANALOG_SIMPLE,
+                    ClockStyle.ANALOG_TICKS -> delay(DELAY_TIME_SLIDE)
+
+                    else -> delay(DELAY_TIME)
+                }
+                _time.emit(System.currentTimeMillis())
+            }
+        }
+    }
+
+    private fun stopTimer() {
+        timeJob?.cancel()
+        timeJob = null
+    }
+
     companion object {
         private const val BOUNCE_DELAY = DateUtils.SECOND_IN_MILLIS
         private const val SETTINGS_VISIBILITY_WAIT = DateUtils.SECOND_IN_MILLIS * 5
         const val SETTINGS_FADE = (DateUtils.SECOND_IN_MILLIS * 5).toInt()
+        private const val DELAY_TIME = DateUtils.SECOND_IN_MILLIS
+        private const val DELAY_TIME_SLIDE = 100L
     }
 }

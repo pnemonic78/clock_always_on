@@ -25,8 +25,8 @@ import kotlin.math.sin
 
 @Composable
 fun AnalogClockTicks(
-    modifier: Modifier = Modifier,
     calendar: Calendar,
+    modifier: Modifier = Modifier,
     isSeconds: Boolean = false,
     color: Color = Color.Unspecified
 ) {

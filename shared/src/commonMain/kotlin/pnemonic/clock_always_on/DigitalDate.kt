@@ -10,10 +10,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import java.text.DateFormat
+import java.util.Calendar
 
 @Composable
 fun DigitalDate(
-    time: Long,
+    calendar: Calendar,
     modifier: Modifier = Modifier,
     style: Int = DateFormat.DEFAULT,
     textColor: Color = Color.Unspecified,
@@ -21,12 +22,11 @@ fun DigitalDate(
 ) {
     val locale = Locale.current.platformLocale
     val formatter = DateFormat.getDateInstance(style, locale)
+    val time = calendar.time
     val text = formatter.format(time)
 
     Text(
-        modifier = modifier.clickable {
-            onClick?.invoke(style)
-        },
+        modifier = modifier.clickable { onClick?.invoke(style) },
         text = text,
         fontSize = 20.sp,
         color = textColor,
@@ -38,6 +38,6 @@ fun DigitalDate(
 @Composable
 private fun DefaultPreview() {
     ClockTheme {
-        DigitalDate(System.currentTimeMillis())
+        DigitalDate(calendar = Calendar.getInstance())
     }
 }

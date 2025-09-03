@@ -22,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.positionInParent
@@ -45,13 +44,14 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
     val platform = rememberPlatform()
     val viewModel = viewModel { ClockViewModel(platform) }
     val configuration by viewModel.configuration.collectAsState()
-    val batteryState by viewModel.batteryState.collectAsState()
+    val timeState by viewModel.time.collectAsState()
+    val batteryState by viewModel.battery.collectAsState()
 
     val density = LocalDensity.current
     var screenSize by remember { mutableStateOf(IntSize.Zero) }
     var dateHeight by remember { mutableIntStateOf(0) }
     var batteryHeight by remember { mutableIntStateOf(0) }
-    var clockSize by remember { mutableStateOf(null as Dp?) }
+    var clockSize by remember { mutableStateOf(clockSizeMin) }
 
     val bounce by viewModel.bounces.collectAsState()
     if ((deltaBouncePx == 0f) || (bounce.deltaX == 0f)) {
@@ -89,6 +89,7 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             ClockView(
+                time = timeState,
                 platform = platform,
                 style = configuration.timeStyle,
                 is24Hours = configuration.is24Hours,
@@ -107,6 +108,7 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
                                 measureClockSize(screenSize, dateHeight, batteryHeight, density)
                         }
                     },
+                    date = timeState,
                     style = configuration.dateStyle,
                     color = configuration.textColor,
                     onClick = { viewModel.onDateClick(it) }
