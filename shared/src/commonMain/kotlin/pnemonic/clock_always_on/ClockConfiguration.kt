@@ -9,7 +9,7 @@ data class ClockConfiguration(
     val is24Hours: Boolean = false,
     val isSeconds: Boolean = false,
     val isDate: Boolean = true,
-    @IntRange(0, 3)
+    @field:IntRange(0, 3)
     val dateStyle: Int = DateFormat.DEFAULT,
     val isBattery: Boolean = true,
     val isBounce: Boolean = false,

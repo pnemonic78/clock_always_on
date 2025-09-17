@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import clock_always_on.shared.generated.resources.Res
 import clock_always_on.shared.generated.resources.clock_frame_material
@@ -21,11 +23,14 @@ import java.util.Calendar
 
 @Composable
 fun AnalogClockMaterial(
-    calendar: Calendar,
+    time: Long,
     modifier: Modifier = Modifier,
     isSeconds: Boolean = false,
     color: Color = Color.Unspecified
 ) {
+    val locale = Locale.current.platformLocale
+    val calendar = remember { Calendar.getInstance(locale) }
+    calendar.timeInMillis = time
     val hours = calendar.get(Calendar.HOUR)
     val minutes = calendar.get(Calendar.MINUTE)
     val millis = calendar.get(Calendar.MILLISECOND)
@@ -87,6 +92,6 @@ fun AnalogClockMaterial(
 @Composable
 private fun DefaultPreview() {
     ClockTheme {
-        AnalogClockMaterial(calendar = Calendar.getInstance())
+        AnalogClockMaterial(time = System.currentTimeMillis())
     }
 }

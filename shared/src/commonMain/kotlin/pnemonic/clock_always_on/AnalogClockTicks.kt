@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import clock_always_on.shared.generated.resources.Res
@@ -25,11 +27,14 @@ import kotlin.math.sin
 
 @Composable
 fun AnalogClockTicks(
-    calendar: Calendar,
+    time: Long,
     modifier: Modifier = Modifier,
     isSeconds: Boolean = false,
     color: Color = Color.Unspecified
 ) {
+    val locale = Locale.current.platformLocale
+    val calendar = remember { Calendar.getInstance(locale) }
+    calendar.timeInMillis = time
     val hours = calendar.get(Calendar.HOUR)
     val minutes = calendar.get(Calendar.MINUTE)
     val millis = calendar.get(Calendar.MILLISECOND)
@@ -157,6 +162,6 @@ private fun ClockFaceWithTicks(
 @Composable
 private fun DefaultPreview() {
     ClockTheme {
-        AnalogClockTicks(calendar = Calendar.getInstance())
+        AnalogClockTicks(time = System.currentTimeMillis())
     }
 }

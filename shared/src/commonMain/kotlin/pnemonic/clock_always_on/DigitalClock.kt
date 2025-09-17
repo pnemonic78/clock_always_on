@@ -17,12 +17,11 @@ private val formatters: MutableMap<String, SimpleDateFormat> = mutableMapOf()
 
 @Composable
 fun DigitalClockSimple(
-    calendar: Calendar,
+    time: Long,
     pattern: String = "HH:mm",
     textColor: Color = Color.Unspecified,
     isThin: Boolean = true
 ) {
-    val time = calendar.time
     val locale = Locale.current.platformLocale
     val formatterKey = "$pattern/$locale"
     var formatter = formatters[formatterKey]
@@ -45,14 +44,13 @@ fun DigitalClockSimple(
 
 @Composable
 fun DigitalClockStacked(
-    calendar: Calendar,
+    time: Long,
     patternHours: String = "HH",
     patternMinutes: String = "mm",
     patternSeconds: String = "ss",
     textColor: Color = Color.Unspecified,
     isThin: Boolean = true
 ) {
-    val time = calendar.time
     val locale = Locale.current.platformLocale
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -109,6 +107,6 @@ fun DigitalClockStacked(
 @Composable
 private fun DefaultPreview() {
     ClockTheme {
-        DigitalClockSimple(calendar = Calendar.getInstance())
+        DigitalClockSimple(time = System.currentTimeMillis())
     }
 }

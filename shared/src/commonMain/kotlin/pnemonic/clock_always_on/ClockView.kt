@@ -38,8 +38,6 @@ fun ClockView(
     size: Dp = clockSizeMin
 ) {
     val locale = Locale.current.platformLocale
-    val calendar = remember { Calendar.getInstance(locale) }
-    calendar.timeInMillis = time
 
     Box(
         modifier = modifier
@@ -52,7 +50,7 @@ fun ClockView(
                 val patternSeconds = if (isSeconds) "ss" else ""
 
                 DigitalClockStacked(
-                    calendar = calendar,
+                    time = time,
                     textColor = textColor,
                     patternHours = patternHours,
                     patternMinutes = patternMinutes,
@@ -63,14 +61,14 @@ fun ClockView(
 
             ClockStyle.ANALOG_SIMPLE -> AnalogClockMaterial(
                 modifier = Modifier.size(size),
-                calendar = calendar,
+                time = time,
                 isSeconds = isSeconds,
                 color = textColor
             )
 
             ClockStyle.ANALOG_TICKS -> AnalogClockTicks(
                 modifier = Modifier.size(size),
-                calendar = calendar,
+                time = time,
                 isSeconds = isSeconds,
                 color = textColor
             )
@@ -84,7 +82,7 @@ fun ClockView(
                 val patternSimple = platform.getBestDateTimePattern(locale, skeletonSimple)
 
                 DigitalClockSimple(
-                    calendar = calendar,
+                    time = time,
                     textColor = textColor,
                     pattern = patternSimple,
                     isThin = (style == ClockStyle.DIGITAL_SIMPLE_THIN)
