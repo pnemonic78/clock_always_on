@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.LocalDateTime
@@ -25,25 +24,22 @@ fun ClockView(
     onClick: IntCallback? = null,
     size: Dp = clockSizeMin
 ) {
-    val locale = Locale.current.platformLocale
-    val platform = LocalPlatform.current
-
     Box(
         modifier = modifier
             .clickable { onClick?.invoke(style) }) {
         when (style) {
             ClockStyle.DIGITAL_STACKED,
             ClockStyle.DIGITAL_STACKED_THIN -> {
-                val patternHours = if (is24Hours) "HH" else "hh"
-                val patternMinutes = "mm"
-                val patternSeconds = if (isSeconds) "ss" else ""
+                val styleHours = if (is24Hours) TimeFormat.Hours else TimeFormat.Hours12
+                val styleMinutes = TimeFormat.Minutes
+                val styleSeconds = if (isSeconds) TimeFormat.Seconds else TimeFormat.None
 
                 DigitalClockStacked(
                     time = time,
                     textColor = textColor,
-                    patternHours = patternHours,
-                    patternMinutes = patternMinutes,
-                    patternSeconds = patternSeconds,
+                    styleHours = styleHours,
+                    styleMinutes = styleMinutes,
+                    styleSeconds = styleSeconds,
                     isThin = (style == ClockStyle.DIGITAL_STACKED_THIN)
                 )
             }
@@ -63,17 +59,16 @@ fun ClockView(
             )
 
             else -> {
-                val skeletonSimple = if (is24Hours) {
-                    if (isSeconds) "Hms" else "Hm"
+                val styleTime = if (is24Hours) {
+                    if (isSeconds) TimeFormat.HoursAndMinutesAndSeconds else TimeFormat.HoursAndMinutes
                 } else {
-                    if (isSeconds) "hms" else "hm"
+                    if (isSeconds) TimeFormat.HoursAndMinutesAndSeconds12 else TimeFormat.HoursAndMinutes12
                 }
-                val patternSimple = platform.getBestDateTimePattern(locale, skeletonSimple)
 
                 DigitalClockSimple(
                     time = time,
                     textColor = textColor,
-                    pattern = patternSimple,
+                    style = styleTime,
                     isThin = (style == ClockStyle.DIGITAL_SIMPLE_THIN)
                 )
             }

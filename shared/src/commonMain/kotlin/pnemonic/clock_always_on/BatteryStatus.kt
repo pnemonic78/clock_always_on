@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -39,12 +40,14 @@ fun BatteryStatus(
     color: Color = Color.Unspecified
 ) {
     val platform = LocalPlatform.current
-    val formatted = platform.formatPercent(state.level / 100.0)
 
-    Row(modifier = modifier) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         BatteryIcon(level = state.level, charging = state.charging, color = color)
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = formatted, color = color)
+        if (state.level >= 0) {
+            Spacer(modifier = Modifier.width(4.dp))
+            val formatted = platform.formatPercent(state.level / 100.0)
+            Text(text = formatted, color = color)
+        }
     }
 }
 

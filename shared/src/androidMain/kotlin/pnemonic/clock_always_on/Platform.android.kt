@@ -5,30 +5,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.intl.PlatformLocale
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.isActive
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import kotlin.time.ExperimentalTime
 
-private const val delayBattery = DateUtils.SECOND_IN_MILLIS * 5
+private const val delayBattery = DateUtils.SECOND_IN_MILLIS * 10
 
 class AndroidPlatform(private val context: Context) : Platform {
     private val dateFormatters = mutableMapOf<String, java.text.DateFormat>()
-
     private val percentFormatter = NumberFormat.getPercentInstance()
 
     override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
 
     override val is24Hours: Boolean get() = android.text.format.DateFormat.is24HourFormat(context)
 
-    override fun getBestDateTimePattern(locale: PlatformLocale, skeleton: String): String {
-        return android.text.format.DateFormat.getBestDateTimePattern(locale, skeleton)
-    }
-
     override fun getBatteryState(): Flow<BatteryState> = flow {
-        while (true) {
+        while (currentCoroutineContext().isActive) {
             val state = BatteryUtils.getState(context) ?: break
             emit(state)
             delay(delayBattery)
@@ -44,7 +45,6 @@ class AndroidPlatform(private val context: Context) : Platform {
         return ds
     }
 
-    @OptIn(ExperimentalTime::class)
     override fun formatDate(date: LocalDate, style: Int, locale: PlatformLocale): String {
         val key = "$style/$locale"
         var formatter = dateFormatters[key]
@@ -58,6 +58,27 @@ class AndroidPlatform(private val context: Context) : Platform {
 
     override fun formatPercent(value: Double): String {
         return percentFormatter.format(value)
+    }
+
+    @OptIn(ExperimentalTime::class)
+    override fun formatTime(
+        time: LocalDateTime,
+        style: TimeFormat,
+        locale: PlatformLocale
+    ): String {
+        if (style == TimeFormat.None) return ""
+        val key = "$style/$locale"
+        var formatter = dateFormatters[key]
+        if (formatter == null) {
+            val pattern = style.pattern ?: android.text.format.DateFormat.getBestDateTimePattern(
+                locale,
+                style.skeleton
+            )
+            formatter = SimpleDateFormat(pattern, locale)
+            dateFormatters[key] = formatter
+        }
+        val instant = time.toInstant(TimeZone.currentSystemDefault())
+        return formatter.format(instant.epochSeconds * DateUtils.SECOND_IN_MILLIS)
     }
 
     companion object {

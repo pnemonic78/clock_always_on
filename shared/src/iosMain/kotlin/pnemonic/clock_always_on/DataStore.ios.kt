@@ -1,9 +1,13 @@
 package pnemonic.clock_always_on
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import kotlinx.cinterop.ExperimentalForeignApi
+import platform.Foundation.NSDocumentDirectory
+import platform.Foundation.NSFileManager
+import platform.Foundation.NSURL
+import platform.Foundation.NSUserDomainMask
 
-private fun createDataStore(): DataStorePreferences = createDataStore(
+@OptIn(ExperimentalForeignApi::class)
+internal fun createDataStore(): DataStorePreferences = createDataStore(
     producePath = {
         val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
             directory = NSDocumentDirectory,

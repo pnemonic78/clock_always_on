@@ -1,16 +1,26 @@
 import SwiftUI
+import UIKit
 import shared
 
-struct ContentView: View {
-	let greet = Greeting().greet()
+struct ComposeView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        // Call your Kotlin function that returns the UIViewController containing the Compose Multiplatform content
+        return MainViewControllerKt.MainViewController()
+    }
 
-	var body: some View {
-		Text(greet)
-	}
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        // Update the UIViewController if needed (e.g., when data changes)
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        ComposeView()
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+    static var previews: some View {
+        ContentView()
+    }
 }
