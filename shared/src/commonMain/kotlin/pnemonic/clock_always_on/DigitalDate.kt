@@ -7,37 +7,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import java.text.DateFormat
-import java.util.Calendar
+import kotlinx.datetime.LocalDate
 
 @Composable
 fun DigitalDate(
-    calendar: Calendar,
+    date: LocalDate,
     modifier: Modifier = Modifier,
     style: Int = DateFormat.DEFAULT,
+    platform: Platform,
     textColor: Color = Color.Unspecified,
     onClick: IntCallback? = null
 ) {
     val locale = Locale.current.platformLocale
-    val formatter = DateFormat.getDateInstance(style, locale)
-    val time = calendar.time
-    val text = formatter.format(time)
+    val formatted = platform.formatDate(date, style, locale)
 
     Text(
         modifier = modifier.clickable { onClick?.invoke(style) },
-        text = text,
+        text = formatted,
         fontSize = 20.sp,
         color = textColor,
         textAlign = TextAlign.Center
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    ClockTheme {
-        DigitalDate(calendar = Calendar.getInstance())
-    }
 }

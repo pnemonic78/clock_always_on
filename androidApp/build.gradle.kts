@@ -9,11 +9,11 @@ val versionMinor = project.properties["APP_VERSION_MINOR"].toString().toInt()
 
 android {
     namespace = "pnemonic.clock_always_on"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "pnemonic.clock_always_on"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = (versionMajor * 1000) + versionMinor
         versionName = "${versionMajor}.${versionMinor}"
     }
@@ -43,11 +43,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 

@@ -26,7 +26,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
@@ -108,8 +107,9 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
                                 measureClockSize(screenSize, dateHeight, batteryHeight, density)
                         }
                     },
-                    date = timeState,
+                    date = timeState.date,
                     style = configuration.dateStyle,
+                    platform = platform,
                     color = configuration.textColor,
                     onClick = { viewModel.onDateClick(it) }
                 )
@@ -127,6 +127,7 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
                         }
                     },
                     state = batteryState,
+                    platform = platform,
                     color = configuration.textColor
                 )
             } else {
@@ -175,12 +176,4 @@ private fun measureClockSize(
     }
     val clockSize = min(max(clockSizeMinPx, clockHeight), clockSizeMaxPx)
     return with(density) { clockSize.toDp() }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    ClockTheme {
-        MainView()
-    }
 }

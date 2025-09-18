@@ -4,30 +4,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import java.util.Calendar
-
-object ClockStyle {
-    const val DIGITAL_STACKED_THIN = 0
-    const val DIGITAL_STACKED = 1
-    const val DIGITAL_SIMPLE_THIN = 2
-    const val DIGITAL_SIMPLE = 3
-    const val ANALOG_SIMPLE = 4
-    const val ANALOG_TICKS = 5
-}
+import kotlinx.datetime.LocalDateTime
 
 val clockSizeMin = 150.dp
 val clockSizeMax = 350.dp
 
 @Composable
 fun ClockView(
-    time: Long,
+    time: LocalDateTime,
     modifier: Modifier = Modifier,
     platform: Platform,
     style: Int = ClockStyle.DIGITAL_STACKED_THIN,
@@ -89,15 +78,5 @@ fun ClockView(
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    ClockTheme {
-        val time = System.currentTimeMillis()
-        val platform = rememberPlatform()
-        ClockView(time = time, platform = platform)
     }
 }

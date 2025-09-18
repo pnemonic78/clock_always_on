@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import clock_always_on.shared.generated.resources.Res
 import clock_always_on.shared.generated.resources.ic_animation_off
@@ -227,20 +226,20 @@ private fun IconButtonBackgroundColor(color: Color, onClick: ColorCallback) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    val configuration = ClockConfiguration()
-    val listener = object : SettingsBarListener {
-        override val on24HourClick: BooleanCallback = {}
-        override val onSecondsClick: BooleanCallback = {}
-        override val onDateClick: BooleanCallback = {}
-        override val onBatteryClick: BooleanCallback = {}
-        override val onBounceClick: BooleanCallback = {}
-        override val onTextColorClick: ColorCallback = {}
-        override val onBackgroundClick: ColorCallback = {}
-    }
-    ClockTheme {
-        SettingsBar(configuration = configuration, listener = listener)
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun DefaultPreview() {
+//    val configuration = ClockConfiguration()
+//    val listener = object : SettingsBarListener {
+//        override val on24HourClick: BooleanCallback = {}
+//        override val onSecondsClick: BooleanCallback = {}
+//        override val onDateClick: BooleanCallback = {}
+//        override val onBatteryClick: BooleanCallback = {}
+//        override val onBounceClick: BooleanCallback = {}
+//        override val onTextColorClick: ColorCallback = {}
+//        override val onBackgroundClick: ColorCallback = {}
+//    }
+//    ClockTheme {
+//        SettingsBar(configuration = configuration, listener = listener)
+//    }
+//}

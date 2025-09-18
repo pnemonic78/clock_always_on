@@ -5,36 +5,30 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.tooling.preview.Preview
 import clock_always_on.shared.generated.resources.Res
 import clock_always_on.shared.generated.resources.clock_frame_material
 import clock_always_on.shared.generated.resources.hour_hand_material
 import clock_always_on.shared.generated.resources.minute_hand_material
 import clock_always_on.shared.generated.resources.second_hand_material
+import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.painterResource
-import java.util.Calendar
 
 @Composable
 fun AnalogClockMaterial(
-    time: Long,
+    time: LocalDateTime,
     modifier: Modifier = Modifier,
     isSeconds: Boolean = false,
     color: Color = Color.Unspecified
 ) {
-    val locale = Locale.current.platformLocale
-    val calendar = remember { Calendar.getInstance(locale) }
-    calendar.timeInMillis = time
-    val hours = calendar.get(Calendar.HOUR)
-    val minutes = calendar.get(Calendar.MINUTE)
-    val millis = calendar.get(Calendar.MILLISECOND)
-    val seconds = calendar.get(Calendar.SECOND) + (millis / 1000f)
+    val hours = time.hour
+    val minutes = time.minute
+    val nanoseconds = time.nanosecond
+    val seconds = time.second + (nanoseconds / 1_000_000_000f)
     val hoursAngle = (hours * 360f) / 12f
     val minutesAngle = (minutes * 360f) / 60f
     val secondsAngle = (seconds * 360f) / 60f
@@ -85,13 +79,5 @@ fun AnalogClockMaterial(
                 contentDescription = "$seconds seconds"
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    ClockTheme {
-        AnalogClockMaterial(time = System.currentTimeMillis())
     }
 }

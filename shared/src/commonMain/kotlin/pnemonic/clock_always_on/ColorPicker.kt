@@ -15,7 +15,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import kotlin.math.max
@@ -83,12 +82,12 @@ fun ColorPickerDialog(onColorSelected: ColorCallback, onDismissRequest: VoidCall
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    ClockTheme {
-        ColorPickerGrid(onColorSelected = {
-            println("selected $it")
-        })
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun DefaultPreview() {
+//    ClockTheme {
+//        ColorPickerGrid(onColorSelected = {
+//            println("selected $it")
+//        })
+//    }
+//}

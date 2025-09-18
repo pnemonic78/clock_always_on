@@ -7,8 +7,6 @@ class IOSPlatform: Platform {
     override val is24Hours: Boolean get() = TODO()
 }
 
-//actual fun getPlatform(): Platform = IOSPlatform()
-
 @Composable
 actual fun rememberPlatform(): Platform {
     return remember { IOSPlatform() }

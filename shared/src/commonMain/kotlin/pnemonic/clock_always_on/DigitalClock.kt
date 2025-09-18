@@ -8,27 +8,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import java.text.SimpleDateFormat
-import java.util.Calendar
-
-private val formatters: MutableMap<String, SimpleDateFormat> = mutableMapOf()
+import kotlinx.datetime.LocalDateTime
 
 @Composable
 fun DigitalClockSimple(
-    time: Long,
+    time: LocalDateTime,
     pattern: String = "HH:mm",
     textColor: Color = Color.Unspecified,
     isThin: Boolean = true
 ) {
     val locale = Locale.current.platformLocale
-    val formatterKey = "$pattern/$locale"
-    var formatter = formatters[formatterKey]
-    if (formatter == null) {
-        formatter = SimpleDateFormat(pattern, locale)
-        formatters[formatterKey] = formatter
-    }
+    val formatter = DateFormat.getInstance(pattern, locale)
     val text = formatter.format(time)
 
     Text(
@@ -44,7 +35,7 @@ fun DigitalClockSimple(
 
 @Composable
 fun DigitalClockStacked(
-    time: Long,
+    time: LocalDateTime,
     patternHours: String = "HH",
     patternMinutes: String = "mm",
     patternSeconds: String = "ss",
@@ -52,15 +43,12 @@ fun DigitalClockStacked(
     isThin: Boolean = true
 ) {
     val locale = Locale.current.platformLocale
+    val formatterHours = DateFormat.getInstance(patternHours, locale)
+    val textHours = formatterHours.format(time)
+    val formatterMinutes = DateFormat.getInstance(patternMinutes, locale)
+    val textMinutes = formatterMinutes.format(time)
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val formatterHoursKey = "$patternHours/$locale"
-        var formatterHours = formatters[formatterHoursKey]
-        if (formatterHours == null) {
-            formatterHours = SimpleDateFormat(patternHours, locale)
-            formatters[formatterHoursKey] = formatterHours
-        }
-        val textHours = formatterHours.format(time)
         Text(
             text = textHours,
             fontSize = 80.sp,
@@ -68,14 +56,6 @@ fun DigitalClockStacked(
             textAlign = TextAlign.Center,
             fontWeight = if (isThin) FontWeight.Thin else FontWeight.Normal
         )
-
-        val formatterMinutesKey = "$patternMinutes/$locale"
-        var formatterMinutes = formatters[formatterMinutesKey]
-        if (formatterMinutes == null) {
-            formatterMinutes = SimpleDateFormat(patternMinutes, locale)
-            formatters[formatterMinutesKey] = formatterMinutes
-        }
-        val textMinutes = formatterMinutes.format(time)
         Text(
             text = textMinutes,
             fontSize = 80.sp,
@@ -85,12 +65,7 @@ fun DigitalClockStacked(
         )
 
         if (!patternSeconds.isEmpty()) {
-            val formatterSecondsKey = "$patternSeconds/$locale"
-            var formatterSeconds = formatters[formatterSecondsKey]
-            if (formatterSeconds == null) {
-                formatterSeconds = SimpleDateFormat(patternSeconds, locale)
-                formatters[formatterSecondsKey] = formatterSeconds
-            }
+            val formatterSeconds = DateFormat.getInstance(patternSeconds, locale)
             val textSeconds = formatterSeconds.format(time)
             Text(
                 text = textSeconds,
@@ -100,13 +75,5 @@ fun DigitalClockStacked(
                 fontWeight = if (isThin) FontWeight.Thin else FontWeight.Normal
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-    ClockTheme {
-        DigitalClockSimple(time = System.currentTimeMillis())
     }
 }

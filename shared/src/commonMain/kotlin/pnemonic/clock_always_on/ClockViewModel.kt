@@ -16,8 +16,13 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import java.text.DateFormat
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 class ClockViewModel(
     platform: Platform
 ) : ViewModel(), SettingsBarListener {
@@ -55,8 +60,9 @@ class ClockViewModel(
     val settingsVisible: StateFlow<Boolean> = _settingsVisible
     private var settingsVisibleJob: Job? = null
 
-    private val _time = MutableStateFlow<Long>(System.currentTimeMillis())
-    val time: StateFlow<Long> = _time
+    private val timeZone = TimeZone.currentSystemDefault()
+    private val _time = MutableStateFlow(Clock.System.now().toLocalDateTime(timeZone))
+    val time: StateFlow<LocalDateTime> = _time
     private var timeJob: Job? = null
 
     init {
@@ -276,7 +282,7 @@ class ClockViewModel(
 
                     else -> delay(DELAY_TIME)
                 }
-                _time.emit(System.currentTimeMillis())
+                _time.emit(Clock.System.now().toLocalDateTime(timeZone))
             }
         }
     }
