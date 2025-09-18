@@ -10,14 +10,12 @@ fun DateView(
     date: LocalDate,
     modifier: Modifier = Modifier,
     style: Int = DateFormat.DEFAULT,
-    platform: Platform,
     color: Color = Color.Unspecified,
     onClick: IntCallback? = null
 ) {
     DigitalDate(
         modifier = modifier,
         date = date,
-        platform = platform,
         style = style,
         textColor = color,
         onClick = onClick

@@ -15,11 +15,11 @@ fun DigitalDate(
     date: LocalDate,
     modifier: Modifier = Modifier,
     style: Int = DateFormat.DEFAULT,
-    platform: Platform,
     textColor: Color = Color.Unspecified,
     onClick: IntCallback? = null
 ) {
     val locale = Locale.current.platformLocale
+    val platform = LocalPlatform.current
     val formatted = platform.formatDate(date, style, locale)
 
     Text(

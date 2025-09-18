@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -42,6 +43,14 @@ private val spacerSize = 8.dp
 fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
     val platform = rememberPlatform()
     val viewModel = viewModel { ClockViewModel(platform) }
+
+    CompositionLocalProvider(LocalPlatform provides platform) {
+        MainView(modifier = modifier, viewModel = viewModel)
+    }
+}
+
+@Composable
+fun MainView(modifier: Modifier = Modifier.fillMaxSize(), viewModel: ClockViewModel) {
     val configuration by viewModel.configuration.collectAsState()
     val timeState by viewModel.time.collectAsState()
     val batteryState by viewModel.battery.collectAsState()
@@ -89,7 +98,6 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
         ) {
             ClockView(
                 time = timeState,
-                platform = platform,
                 style = configuration.timeStyle,
                 is24Hours = configuration.is24Hours,
                 isSeconds = configuration.isSeconds,
@@ -109,7 +117,6 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
                     },
                     date = timeState.date,
                     style = configuration.dateStyle,
-                    platform = platform,
                     color = configuration.textColor,
                     onClick = { viewModel.onDateClick(it) }
                 )
@@ -127,7 +134,6 @@ fun MainView(modifier: Modifier = Modifier.fillMaxSize()) {
                         }
                     },
                     state = batteryState,
-                    platform = platform,
                     color = configuration.textColor
                 )
             } else {

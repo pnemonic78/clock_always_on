@@ -18,7 +18,6 @@ val clockSizeMax = 350.dp
 fun ClockView(
     time: LocalDateTime,
     modifier: Modifier = Modifier,
-    platform: Platform,
     style: Int = ClockStyle.DIGITAL_STACKED_THIN,
     is24Hours: Boolean = false,
     isSeconds: Boolean = false,
@@ -27,6 +26,7 @@ fun ClockView(
     size: Dp = clockSizeMin
 ) {
     val locale = Locale.current.platformLocale
+    val platform = LocalPlatform.current
 
     Box(
         modifier = modifier

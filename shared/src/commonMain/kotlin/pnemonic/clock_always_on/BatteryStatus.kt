@@ -35,10 +35,10 @@ private val iconSize = 24.dp
 @Composable
 fun BatteryStatus(
     state: BatteryState,
-    platform: Platform,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified
 ) {
+    val platform = LocalPlatform.current
     val formatted = platform.formatPercent(state.level / 100.0)
 
     Row(modifier = modifier) {
