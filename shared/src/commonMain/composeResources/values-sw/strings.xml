@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">rangi ya mandhari</string>
+    <string name="battery">betri</string>
+    <string name="bounce">kuruka</string>
+    <string name="date">tarehe</string>
+    <string name="frame">fremu</string>
+    <string name="seconds">sekunde</string>
+    <string name="text_color">rangi ya maandishi</string>
+</resources>

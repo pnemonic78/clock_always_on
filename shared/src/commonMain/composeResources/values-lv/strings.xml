@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">fona krāsa</string>
+    <string name="battery">akumulators</string>
+    <string name="bounce">atlēkšana</string>
+    <string name="date">datums</string>
+    <string name="frame">kadrs</string>
+    <string name="seconds">sekundes</string>
+    <string name="text_color">teksta krāsa</string>
+</resources>

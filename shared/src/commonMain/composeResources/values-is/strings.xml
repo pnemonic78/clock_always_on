@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">bakgrunnslitur</string>
+    <string name="battery">rafhlaða</string>
+    <string name="bounce">hopp</string>
+    <string name="date">dagsetning</string>
+    <string name="frame">rammi</string>
+    <string name="seconds">sekúndur</string>
+    <string name="text_color">textalitur</string>
+</resources>

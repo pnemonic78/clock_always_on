@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">арын өнгө</string>
+    <string name="battery">зай</string>
+    <string name="bounce">үсрэлт</string>
+    <string name="date">огноо</string>
+    <string name="frame">хүрээ</string>
+    <string name="seconds">секунд</string>
+    <string name="text_color">текстийн өнгө</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">पृष्ठभूमि रङ</string>
+    <string name="battery">ब्याट्री</string>
+    <string name="bounce">बाउन्स</string>
+    <string name="date">मिति</string>
+    <string name="frame">फ्रेम</string>
+    <string name="seconds">सेकेन्ड</string>
+    <string name="text_color">पाठ रङ</string>
+</resources>

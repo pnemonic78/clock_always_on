@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">ಹಿನ್ನೆಲೆ ಬಣ್ಣ</string>
+    <string name="battery">ಬ್ಯಾಟರಿ</string>
+    <string name="bounce">ಬೌನ್ಸ್</string>
+    <string name="date">ದಿನಾಂಕ</string>
+    <string name="frame">ಫ್ರೇಮ್</string>
+    <string name="seconds">ಸೆಕೆಂಡುಗಳು</string>
+    <string name="text_color">ಪಠ್ಯ ಬಣ್ಣ</string>
+</resources>

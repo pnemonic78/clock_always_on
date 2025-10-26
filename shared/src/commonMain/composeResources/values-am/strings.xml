@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">የጀርባ ቀለም</string>
+    <string name="battery">ባትሪ</string>
+    <string name="bounce">መነሳት</string>
+    <string name="date">ቀን</string>
+    <string name="frame">ፍሬም</string>
+    <string name="seconds">ሰከንዶች</string>
+    <string name="text_color">የጽሑፍ ቀለም</string>
+</resources>

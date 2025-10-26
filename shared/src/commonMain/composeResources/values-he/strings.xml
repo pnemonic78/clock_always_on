@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">צבע רקע</string>
+    <string name="battery">סוללה</string>
+    <string name="bounce">קפיצה</string>
+    <string name="date">תאריך</string>
+    <string name="frame">מסגרת</string>
+    <string name="seconds">שניות</string>
+    <string name="text_color">צבע טקסט</string>
+</resources>

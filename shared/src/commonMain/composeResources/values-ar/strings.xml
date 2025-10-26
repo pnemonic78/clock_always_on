@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">لون الخلفية</string>
+    <string name="battery">بطارية</string>
+    <string name="bounce">ارتداد</string>
+    <string name="date">تاريخ</string>
+    <string name="frame">إطار</string>
+    <string name="seconds">ثواني</string>
+    <string name="text_color">لون النص</string>
+</resources>

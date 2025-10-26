@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">สีพื้นหลัง</string>
+    <string name="battery">แบตเตอรี่</string>
+    <string name="bounce">การเด้งกลับ</string>
+    <string name="date">วันที่</string>
+    <string name="frame">เฟรม</string>
+    <string name="seconds">วินาที</string>
+    <string name="text_color">สีข้อความ</string>
+</resources>

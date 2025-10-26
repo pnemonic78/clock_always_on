@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">နောက်ခံအရောင်</string>
+    <string name="battery">ဘက်ထရီ</string>
+    <string name="bounce">ပြန်ခုန်ခြင်း</string>
+    <string name="date">ရက်စွဲ</string>
+    <string name="frame">ဘောင်</string>
+    <string name="seconds">စက္ကန့်</string>
+    <string name="text_color">စာသားအရောင်</string>
+</resources>

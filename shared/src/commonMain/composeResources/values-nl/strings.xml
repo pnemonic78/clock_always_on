@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">achtergrondkleur</string>
+    <string name="battery">batterij</string>
+    <string name="bounce">stuiteren</string>
+    <string name="date">datum</string>
+    <string name="frame">kader</string>
+    <string name="seconds">seconden</string>
+    <string name="text_color">tekstkleur</string>
+</resources>

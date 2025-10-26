@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">arka plan rengi</string>
+    <string name="battery">pil</string>
+    <string name="bounce">sıçrama</string>
+    <string name="date">tarih</string>
+    <string name="frame">kare</string>
+    <string name="seconds">saniye</string>
+    <string name="text_color">metin rengi</string>
+</resources>

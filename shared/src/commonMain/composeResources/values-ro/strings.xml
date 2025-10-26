@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">culoare fundal</string>
+    <string name="battery">baterie</string>
+    <string name="bounce">scădere</string>
+    <string name="date">dată</string>
+    <string name="frame">cadru</string>
+    <string name="seconds">secunde</string>
+    <string name="text_color">culoare text</string>
+</resources>

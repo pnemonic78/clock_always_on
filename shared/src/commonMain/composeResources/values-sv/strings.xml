@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">bakgrundsfärg</string>
+    <string name="battery">batteri</string>
+    <string name="bounce">studsa</string>
+    <string name="date">datum</string>
+    <string name="frame">bildruta</string>
+    <string name="seconds">sekunder</string>
+    <string name="text_color">textfärg</string>
+</resources>

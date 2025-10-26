@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">ფონის ფერი</string>
+    <string name="battery">ბატარეა</string>
+    <string name="bounce">ხტომა</string>
+    <string name="date">თარიღი</string>
+    <string name="frame">ჩარჩო</string>
+    <string name="seconds">წამები</string>
+    <string name="text_color">ტექსტის ფერი</string>
+</resources>

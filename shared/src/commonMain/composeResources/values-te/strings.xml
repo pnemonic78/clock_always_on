@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">నేపథ్య రంగు</string>
+    <string name="battery">బ్యాటరీ</string>
+    <string name="bounce">బౌన్స్</string>
+    <string name="date">తేదీ</string>
+    <string name="frame">ఫ్రేమ్</string>
+    <string name="seconds">సెకన్లు</string>
+    <string name="text_color">టెక్స్ట్ రంగు</string>
+</resources>

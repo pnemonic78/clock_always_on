@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">farba pozadia</string>
+    <string name="battery">batéria</string>
+    <string name="bounce">odraziť</string>
+    <string name="date">dátum</string>
+    <string name="frame">rámec</string>
+    <string name="seconds">sekundy</string>
+    <string name="text_color">farba textu</string>
+</resources>

@@ -53,7 +53,7 @@ fun AnalogClockTicks(
             painter = hoursHand,
             colorFilter = tint,
             alpha = 0.9f,
-            contentDescription = "$hours hours"
+            contentDescription = ""
         )
         Image(
             modifier = Modifier
@@ -62,7 +62,7 @@ fun AnalogClockTicks(
             painter = minutesHand,
             colorFilter = tint,
             alpha = 0.9f,
-            contentDescription = "$minutes minutes"
+            contentDescription = ""
         )
         if (isSeconds) {
             Image(
@@ -72,7 +72,7 @@ fun AnalogClockTicks(
                 painter = secondsHand,
                 colorFilter = tint,
                 alpha = 0.9f,
-                contentDescription = "$seconds seconds"
+                contentDescription = ""
             )
         }
     }

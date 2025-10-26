@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">фон түсү</string>
+    <string name="battery">батарея</string>
+    <string name="bounce">секирүү</string>
+    <string name="date">дата</string>
+    <string name="frame">кадр</string>
+    <string name="seconds">секунддар</string>
+    <string name="text_color">текст түсү</string>
+</resources>

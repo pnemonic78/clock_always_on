@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">fon rəngi</string>
+    <string name="battery">batareya</string>
+    <string name="bounce">sıçrayış</string>
+    <string name="date">tarix</string>
+    <string name="frame">çərçivə</string>
+    <string name="seconds">saniyə</string>
+    <string name="text_color">mətn rəngi</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">පසුබිම් වර්ණය</string>
+    <string name="battery">බැටරි</string>
+    <string name="bounce">බවුන්ස්</string>
+    <string name="date">දිනය</string>
+    <string name="frame">රාමුව</string>
+    <string name="seconds">තත්පර</string>
+    <string name="text_color">පෙළ වර්ණය</string>
+</resources>

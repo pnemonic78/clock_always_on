@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">ngjyra e sfondit</string>
+    <string name="battery">bateri</string>
+    <string name="bounce">kërcimi</string>
+    <string name="date">data</string>
+    <string name="frame">kornizë</string>
+    <string name="seconds">sekondat</string>
+    <string name="text_color">ngjyra e tekstit</string>
+</resources>

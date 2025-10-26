@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">ពណ៌ផ្ទៃខាងក្រោយ</string>
+    <string name="battery">ថ្ម</string>
+    <string name="bounce">លោត</string>
+    <string name="date">កាលបរិច្ឆេទ</string>
+    <string name="frame">ស៊ុម</string>
+    <string name="seconds">វិនាទី</string>
+    <string name="text_color">ពណ៌អក្សរ</string>
+</resources>

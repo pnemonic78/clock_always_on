@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">taustaväri</string>
+    <string name="battery">akku</string>
+    <string name="bounce">pomppiminen</string>
+    <string name="date">päivämäärä</string>
+    <string name="frame">kehys</string>
+    <string name="seconds">sekuntia</string>
+    <string name="text_color">tekstin väri</string>
+</resources>

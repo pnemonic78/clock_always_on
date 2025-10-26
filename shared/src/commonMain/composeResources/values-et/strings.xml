@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">taustavärv</string>
+    <string name="battery">aku</string>
+    <string name="bounce">põrkumine</string>
+    <string name="date">kuupäev</string>
+    <string name="frame">raam</string>
+    <string name="seconds">sekundid</string>
+    <string name="text_color">teksti värv</string>
+</resources>

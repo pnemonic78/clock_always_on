@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">背景色</string>
+    <string name="battery">バッテリー</string>
+    <string name="bounce">バウンス</string>
+    <string name="date">日付</string>
+    <string name="frame">フレーム</string>
+    <string name="seconds">秒</string>
+    <string name="text_color">テキストの色</string>
+</resources>

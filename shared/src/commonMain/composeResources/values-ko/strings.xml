@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">배경색</string>
+    <string name="battery">배터리</string>
+    <string name="bounce">바운스</string>
+    <string name="date">날짜</string>
+    <string name="frame">프레임</string>
+    <string name="seconds">초</string>
+    <string name="text_color">텍스트 색상</string>
+</resources>

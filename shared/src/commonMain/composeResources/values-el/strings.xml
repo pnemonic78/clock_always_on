@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">χρώμα φόντου</string>
+    <string name="battery">μπαταρία</string>
+    <string name="bounce">αναπήδηση</string>
+    <string name="date">ημερομηνία</string>
+    <string name="frame">πλαίσιο</string>
+    <string name="seconds">δευτερόλεπτα</string>
+    <string name="text_color">χρώμα κειμένου</string>
+</resources>

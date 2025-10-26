@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">ֆոնի գույնը</string>
+    <string name="battery">մարտկոց</string>
+    <string name="bounce">ցատկ</string>
+    <string name="date">ամսաթիվ</string>
+    <string name="frame">շրջանակ</string>
+    <string name="seconds">վայրկյաններ</string>
+    <string name="text_color">տեքստի գույնը</string>
+</resources>

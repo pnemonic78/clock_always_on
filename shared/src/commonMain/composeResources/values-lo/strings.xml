@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">ສີພື້ນຫຼັງ</string>
+    <string name="battery">ແບັດເຕີຣີ</string>
+    <string name="bounce">ການສະທ້ອນ</string>
+    <string name="date">ວັນທີ</string>
+    <string name="frame">ກອບ</string>
+    <string name="seconds">ວິນາທີ</string>
+    <string name="text_color">ສີຂໍ້ຄວາມ</string>
+</resources>

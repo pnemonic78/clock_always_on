@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">boja pozadine</string>
+    <string name="battery">baterija</string>
+    <string name="bounce">odbijanje</string>
+    <string name="date">datum</string>
+    <string name="frame">okvir</string>
+    <string name="seconds">sekunde</string>
+    <string name="text_color">boja teksta</string>
+</resources>

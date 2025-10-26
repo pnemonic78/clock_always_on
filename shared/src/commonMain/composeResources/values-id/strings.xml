@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">warna latar belakang</string>
+    <string name="battery">baterai</string>
+    <string name="bounce">pantulan</string>
+    <string name="date">tanggal</string>
+    <string name="frame">bingkai</string>
+    <string name="seconds">detik</string>
+    <string name="text_color">warna teks</string>
+</resources>

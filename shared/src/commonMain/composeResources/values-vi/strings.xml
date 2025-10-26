@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">màu nền</string>
+    <string name="battery">pin</string>
+    <string name="bounce">nảy</string>
+    <string name="date">ngày</string>
+    <string name="frame">khung</string>
+    <string name="seconds">giây</string>
+    <string name="text_color">màu chữ</string>
+</resources>

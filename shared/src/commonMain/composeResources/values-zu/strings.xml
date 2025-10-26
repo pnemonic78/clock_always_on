@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">umbala wangemuva</string>
+    <string name="battery">ibhethri</string>
+    <string name="bounce">ukugxuma</string>
+    <string name="date">usuku</string>
+    <string name="frame">uhlaka</string>
+    <string name="seconds">imizuzwana</string>
+    <string name="text_color">umbala wombhalo</string>
+</resources>

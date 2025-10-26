@@ -1,6 +1,7 @@
 package pnemonic.clock_always_on
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import clock_always_on.shared.generated.resources.Res
 import clock_always_on.shared.generated.resources.ic_battery_0_bar
@@ -30,6 +32,7 @@ import clock_always_on.shared.generated.resources.ic_battery_charging_full
 import clock_always_on.shared.generated.resources.ic_battery_full
 import clock_always_on.shared.generated.resources.ic_battery_unknown
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 private val iconSize = 24.dp
 
@@ -77,42 +80,42 @@ fun BatteryIcon(level: Int, charging: Boolean, color: Color = Color.Unspecified)
         modifier = Modifier.size(iconSize),
         painter = painter,
         colorFilter = tint,
-        contentDescription = "battery $level"
+        contentDescription = level.toString()
     )
 }
-//
-//@Preview(showBackground = true)
-//@Composable
-//private fun DefaultPreview() {
-//    ClockTheme {
-//        Column {
-//            BatteryStatus(BatteryState(-1, false))
-//            BatteryStatus(BatteryState(0, false))
-//            BatteryStatus(BatteryState(5, false))
-//            BatteryStatus(BatteryState(15, false))
-//            BatteryStatus(BatteryState(25, false))
-//            BatteryStatus(BatteryState(35, false))
-//            BatteryStatus(BatteryState(45, false))
-//            BatteryStatus(BatteryState(55, false))
-//            BatteryStatus(BatteryState(65, false))
-//            BatteryStatus(BatteryState(75, false))
-//            BatteryStatus(BatteryState(85, false))
-//            BatteryStatus(BatteryState(95, false))
-//            BatteryStatus(BatteryState(100, false))
-//
-//            BatteryStatus(BatteryState(-1, true))
-//            BatteryStatus(BatteryState(0, true))
-//            BatteryStatus(BatteryState(5, true))
-//            BatteryStatus(BatteryState(15, true))
-//            BatteryStatus(BatteryState(25, true))
-//            BatteryStatus(BatteryState(35, true))
-//            BatteryStatus(BatteryState(45, true))
-//            BatteryStatus(BatteryState(55, true))
-//            BatteryStatus(BatteryState(65, true))
-//            BatteryStatus(BatteryState(75, true))
-//            BatteryStatus(BatteryState(85, true))
-//            BatteryStatus(BatteryState(95, true))
-//            BatteryStatus(BatteryState(100, true))
-//        }
-//    }
-//}
+
+@Preview(showBackground = true)
+@Composable
+private fun DefaultPreview() {
+    ClockTheme {
+        Column {
+            BatteryStatus(BatteryState(-1, false))
+            BatteryStatus(BatteryState(0, false))
+            BatteryStatus(BatteryState(5, false))
+            BatteryStatus(BatteryState(15, false))
+            BatteryStatus(BatteryState(25, false))
+            BatteryStatus(BatteryState(35, false))
+            BatteryStatus(BatteryState(45, false))
+            BatteryStatus(BatteryState(55, false))
+            BatteryStatus(BatteryState(65, false))
+            BatteryStatus(BatteryState(75, false))
+            BatteryStatus(BatteryState(85, false))
+            BatteryStatus(BatteryState(95, false))
+            BatteryStatus(BatteryState(100, false))
+
+            BatteryStatus(BatteryState(-1, true))
+            BatteryStatus(BatteryState(0, true))
+            BatteryStatus(BatteryState(5, true))
+            BatteryStatus(BatteryState(15, true))
+            BatteryStatus(BatteryState(25, true))
+            BatteryStatus(BatteryState(35, true))
+            BatteryStatus(BatteryState(45, true))
+            BatteryStatus(BatteryState(55, true))
+            BatteryStatus(BatteryState(65, true))
+            BatteryStatus(BatteryState(75, true))
+            BatteryStatus(BatteryState(85, true))
+            BatteryStatus(BatteryState(95, true))
+            BatteryStatus(BatteryState(100, true))
+        }
+    }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">背景颜色</string>
+    <string name="battery">电池</string>
+    <string name="bounce">弹跳</string>
+    <string name="date">日期</string>
+    <string name="frame">帧</string>
+    <string name="seconds">秒</string>
+    <string name="text_color">文本颜色</string>
+</resources>

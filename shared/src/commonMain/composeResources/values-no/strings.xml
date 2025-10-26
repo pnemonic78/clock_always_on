@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">bakgrunnsfarge</string>
+    <string name="battery">batteri</string>
+    <string name="bounce">avspilling</string>
+    <string name="date">dato</string>
+    <string name="frame">ramme</string>
+    <string name="seconds">sekunder</string>
+    <string name="text_color">tekstfarge</string>
+</resources>

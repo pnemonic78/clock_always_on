@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color"> پس منظر کا رنگ</string>
+    <string name="battery"> بیٹری</string>
+    <string name="bounce"> اچھال</string>
+    <string name="date">تاریخ</string>
+    <string name="frame">فریم</string>
+    <string name="seconds">سیکنڈز</string>
+    <string name="text_color"> متن کا رنگ</string>
+</resources>

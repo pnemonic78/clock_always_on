@@ -12,11 +12,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import clock_always_on.shared.generated.resources.Res
 import clock_always_on.shared.generated.resources.clock_frame_material
+import clock_always_on.shared.generated.resources.frame
 import clock_always_on.shared.generated.resources.hour_hand_material
 import clock_always_on.shared.generated.resources.minute_hand_material
 import clock_always_on.shared.generated.resources.second_hand_material
 import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AnalogClockMaterial(
@@ -47,7 +49,7 @@ fun AnalogClockMaterial(
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = frame,
-            contentDescription = "frame",
+            contentDescription = stringResource(Res.string.frame),
             colorFilter = tint
         )
         Image(
@@ -57,7 +59,7 @@ fun AnalogClockMaterial(
             painter = hoursHand,
             colorFilter = tint,
             alpha = 0.9f,
-            contentDescription = "$hours hours"
+            contentDescription = ""
         )
         Image(
             modifier = Modifier
@@ -66,7 +68,7 @@ fun AnalogClockMaterial(
             painter = minutesHand,
             colorFilter = tint,
             alpha = 0.9f,
-            contentDescription = "$minutes minutes"
+            contentDescription = ""
         )
         if (isSeconds) {
             Image(
@@ -76,7 +78,7 @@ fun AnalogClockMaterial(
                 painter = secondsHand,
                 colorFilter = tint,
                 alpha = 0.9f,
-                contentDescription = "$seconds seconds"
+                contentDescription = ""
             )
         }
     }

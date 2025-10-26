@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="background_color">цвет фона</string>
+    <string name="battery">батарея</string>
+    <string name="bounce">отскок</string>
+    <string name="date">дата</string>
+    <string name="frame">кадр</string>
+    <string name="seconds">секунды</string>
+    <string name="text_color">цвет текста</string>
+</resources>
